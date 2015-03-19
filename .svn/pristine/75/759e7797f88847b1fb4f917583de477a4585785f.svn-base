@@ -1,0 +1,196 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package crawler;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.jsoup.nodes.Document;
+/**
+ *
+ * @author Boney
+ */
+public class ApiCall {
+    private final MySQLAccess dao;
+    private final String productDetailsId, productId;
+    
+    ApiCall(String id, String pid, MySQLAccess obj)
+    {
+        dao = obj;
+        productDetailsId = id;
+        productId = pid;
+    }
+
+    /**
+     *
+     * @param doc
+     */
+    @SuppressWarnings("unchecked") 
+    public void flipkart(Document doc)
+    {
+        //System.out.println("flipkart");
+        Element fprice = doc.select("span.selling-price").first();
+        Element discount = doc.select("span.discount").first();
+        Element fmrp = doc.select("div.prices .price").first();
+        Element rating = doc.select(".ratings-reviews-wrap .fk-stars").first();
+        Element ratingCount = doc.select(".ratings-reviews-wrap .count span").first();
+        double fmrpPrice = 0.0;
+        double discountPer, ratingNum, ratingCountNum;
+        discountPer = 0;
+        ratingNum=0;
+        ratingCountNum = 0;
+        if(fmrp != null && !fmrp.text().isEmpty())
+            fmrpPrice = Double.valueOf(fmrp.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        if(discount != null && !discount.text().isEmpty())
+            discountPer = Double.valueOf(discount.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        if(rating != null && !rating.attr("title").isEmpty())
+            ratingNum = Double.valueOf(rating.attr("title").replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        if(ratingCount != null && !ratingCount.text().isEmpty())
+            ratingCountNum = Double.valueOf(ratingCount.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+
+        //System.out.println(ratingNum+" "+ratingCountNum);
+        //System.out.println(doc.toString());
+        double fnewPrice = Double.valueOf(fprice.attr("data-evar48").replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        dao.updateStorePrice(productDetailsId, fmrpPrice, fnewPrice, discountPer, ratingNum, ratingCountNum);
+        Elements images = doc.select(".productImages .imgWrapper .productImage");
+        JSONArray list = new JSONArray();
+        images.stream().map((element) -> {
+            JSONObject tempobj = new JSONObject();
+            tempobj.put("normal", element.attr("data-src"));
+            tempobj.put("zoom", element.attr("data-zoomimage"));
+            return tempobj;
+          }).forEach((tempobj) -> {
+              list.add(tempobj);
+          });
+        Element keyfeatures = doc.select(".keyFeatures .keyFeaturesList").first();
+        Element specs = doc.select(".productSpecs").first();
+        Element overview = doc.select(".rpdSection").first();
+        String keyf, overv, spec;
+        keyf="";
+        overv="";
+        spec="";
+
+        if(keyfeatures !=null)
+        {
+            keyfeatures.select("img[data-src]").stream().map((img) -> {
+                img.attr("src", img.attr("data-src"));
+                return img;
+            }).forEach((img) -> {
+                img.removeAttr("data-src");
+            });
+            keyf = keyfeatures.toString().replaceAll("[\n\r]", "");
+        }
+            
+        if(overview !=null)
+        {
+            overview.select("img[data-src]").stream().map((img) -> {
+                img.attr("src", img.attr("data-src"));
+                return img;
+            }).forEach((img) -> {
+                img.removeAttr("data-src");
+            });
+            overv = overview.toString().replaceAll("[\n\r]", "");
+        }
+        if(specs !=null)
+        {
+            specs.select("img[data-src]").stream().map((img) -> {
+                img.attr("src", img.attr("data-src"));
+                return img;
+            }).forEach((img) -> {
+                img.removeAttr("data-src");
+            });
+            spec = specs.toString().replaceAll("[\n\r]", "");
+        }
+        dao.updateProductData(productId, list.toString(), keyf, spec, overv);
+         
+    }
+    
+    /**
+     *
+     * @param doc
+     */
+    @SuppressWarnings("unchecked") 
+    public void amazon(Document doc)
+    {
+        //System.out.println("amazon");
+        Elements totalele = doc.select("#price table tr");
+        //System.out.println("size "+totalele.size()+" "+  productDetailsId +" "+affiliateUrl +" "+Thread.currentThread().getId());
+        Element amrp = doc.select("#price table tr:first-child td:last-child").first();
+        Element discount = doc.select("#regularprice_savings td:last-child").first();
+        Element rating = doc.select("#acrPopover").first();
+        Element ratingCount = doc.select("#acrCustomerReviewText").first();
+        double amrpPrice = 0.0;
+        double discountPer, ratingNum, ratingCountNum;
+        discountPer = 0;
+        ratingNum=0;
+        ratingCountNum = 0;
+        if(amrp != null && !amrp.text().isEmpty() && totalele.size() > 2)
+            amrpPrice = Double.valueOf(amrp.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        if(discount != null && !discount.text().isEmpty() )
+        {
+            int tmp1, tmp2;
+            tmp1 = discount.text().indexOf('(');
+            tmp2 = discount.text().indexOf(')');
+            String newStr;
+            newStr = discount.text().substring(tmp1, tmp2);
+            discountPer = Double.valueOf(newStr.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        }
+        if(rating != null && !rating.attr("title").isEmpty())
+        {
+            int tmp1, tmp2;
+            tmp1 = 0;
+            tmp2 = rating.attr("title").indexOf("out");
+            String newStr;
+            newStr = rating.attr("title").substring(tmp1, tmp2);
+            ratingNum = Double.valueOf(newStr.replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        }
+        if(ratingCount != null && !ratingCount.text().isEmpty())
+            ratingCountNum = Double.valueOf(ratingCount.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+        
+        Element link = doc.select("#fbt_item_data").first();
+        if(link != null && !link.attr("data-fbt").isEmpty())
+        {
+            String data = link.attr("data-fbt");
+            JSONParser parser = new JSONParser();
+            Object aobj;
+            try {
+                aobj = parser.parse(data);
+                JSONObject ajsonObject = (JSONObject) aobj;
+                JSONArray aarr= (JSONArray) ajsonObject.get("itemData");
+                JSONObject ajv = (JSONObject)aarr.get(0);
+                double anewPrice = Double.parseDouble(ajv.get("buyingPrice").toString());
+                dao.updateStorePrice(productDetailsId, amrpPrice, anewPrice, discountPer, ratingNum, ratingCountNum);
+            } catch (ParseException ex) {
+                Logger.getLogger(HttpThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        //double newPrice = Double.valueOf(link.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+
+        }
+        else
+        {
+            Element link2 = doc.select("#priceblock_ourprice").first();
+            if(link2 != null && !link2.text().isEmpty())
+            {
+                double ourprice = Double.valueOf(link2.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+                dao.updateStorePrice(productDetailsId, amrpPrice, ourprice, discountPer, ratingNum, ratingCountNum);
+            }
+            else
+            {
+                Element link3 = doc.select("#priceblock_saleprice").first();
+                if(link3 != null && !link3.text().isEmpty())
+                {
+                    double ourprice = Double.valueOf(link3.text().replaceAll("[^\\d.]+|\\.(?!\\d)", ""));
+                    dao.updateStorePrice(productDetailsId, amrpPrice, ourprice, discountPer, ratingNum, ratingCountNum);
+                }
+            }
+        }
+    }
+}

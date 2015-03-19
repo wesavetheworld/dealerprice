@@ -1,0 +1,584 @@
+			            <!-- End of Header -->
+            <div id="pageHeader">
+                <div id="innerPageHeader">
+                    <div id="mainMenuBtn">
+                        <span id="allCatBtn">
+                            <i class="fa fa-th-large"></i><a href="#">All Categories</a>
+                        <span>
+                    </div>
+                    <!-- End of Main Menu Button -->
+                    <div id="breadcrumb">
+                        <div id="breadcrumbItm">
+                            <span id="bcPnt">Mobile & Tablets</span> <span class="nextItm">&gt;</span> <span class="bcItm lastItm">Mobile</span><span id="bcItmCount">(577 Items)</span>
+                        </div>
+                    </div>
+                    <!-- End of Breadcrumb -->
+                    <div id="sorting">
+                        <div id="sortMenu">
+                            <span id="sortPnt">Sort by:</span> <span class="sItm activeS">Popularity</span>|<span class="sItm">New</span>|<span class="sItm">Discount</span>|<span id="priceHd">Price:</span> <span class="sPItm">Low</span>|<span class="sPItm">High</span>
+                        </div>
+                    </div>
+                    <!-- End of Sorting -->
+                </div>    
+            </div>
+            <div id="pageMegaMenu">
+                <div id="megaMenu" class="pageMenu">
+               		<?php $this->beginContent('//layouts/mega-menu'); $this->endContent(); ?>
+                </div>  
+                <!-- End of Mega Menu -->
+            </div>
+            <!-- End of Menu and Slider -->
+			<div id="pageContents">
+                <div id="filterPanel">
+                    <div id="filterTitle">
+                		<span class="fltSubTitle">Refine your search</span>
+                    </div>
+                    <div class="filterCat">
+                    	<span class="fltSubTitle">Mobile Brands</span>
+                        <ul>
+                           	<li class="activeF"><input type="checkbox" value="" checked="checked"> Samsung</li>
+                            <li><input type="checkbox" value=""> Apple</li>
+                            <li><input type="checkbox" value=""> Nokia</li>
+                            <li><input type="checkbox" value=""> Micromax</li>
+                            <li><input type="checkbox" value=""> Microsoft</li>
+                            <li><input type="checkbox" value=""> LG</li>
+                            <li><input type="checkbox" value=""> HTC</li>
+                            <li><input type="checkbox" value=""> Blackberry</li>
+                            <li><input type="checkbox" value="all"> All</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filterCat">
+                    	<span class="fltSubTitle">Mobile Type</span>
+                        <ul>
+                           	<li class="activeF"><input type="checkbox" value="" checked="checked"> Android</li>
+                            <li><input type="checkbox" value=""> iOS</li>
+                            <li><input type="checkbox" value=""> Windows</li>
+                            <li><input type="checkbox" value=""> Blackberry OS</li>
+                            <li><input type="checkbox" value=""> Basic Phone</li>
+                            <li><input type="checkbox" value="all"> All</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filterCat">
+                        <span class="fltSubTitle">Discount</span>
+                        <ul class="discout-list" style="list-style: none;">
+                            <li><input type="radio" class="discount-apply" value="0-10" name="discount"> 0-10%</li>
+                            <li><input type="radio" class="discount-apply" value="11-20" name="discount"> 10-20%</li>
+                            <li><input type="radio" class="discount-apply" value="21-30" name="discount"> 20-30%</li>
+                            <li><input type="radio" class="discount-apply" value="31-40" name="discount"> 30-40%</li>
+                            <li><input type="radio" class="discount-apply" value="41-50" name="discount"> 40-50%</li>
+                            <li><input type="radio" class="discount-apply" value="51-100" name="discount"> More than 50%</li>
+                        </ul>
+                    </div>    
+                </div>
+                <div id="products">
+                
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                    <!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+                    <div class="product_item keySpec">
+                        <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+                        <div class="image_wrap">
+                            <img src="<?=Yii::app()->theme->baseUrl?>/images/featured-products.jpg" alt="">
+                                <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+                                <div class="actions_wrap">
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container">
+                                    <span class="tooltip right">Add to Wishlist</span></a>
+                                    <a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container">
+                                    <span class="tooltip left">Add to Compare</span></a>
+                                </div><!--/ .actions_wrap-->
+								<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+                        </div><!--/. image_wrap-->
+                        <!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+                        <!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+                        <div class="description">
+                            <a href="#" class="productTitle">Lorem Ipsum Dolor Sit Amet Con Sectetuer Adipiscing</a>
+							<div class="keyDescriptions">
+								<ul>
+									<li>Feature one</li>
+									<li>Feature Two</li>
+									<li>Feature Three</li>
+									<li>Feature Four</li>
+								</ul>
+							</div>
+                            <div class="clearfix product_info">
+                                <p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. 80</span><span class="discountRate">(29% off)</span></span></p>
+                                <p class="product_price alignleft"><b>Rs. 44.99</b></p>
+                            </div>
+                        </div>
+                        <!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+                    </div><!--/ .product_item-->
+                    <!-- - - - - - - - - - - - - - End product - - - - - - - - - - - - - - - - -->
+                    
+                </div>
+                <div style="clear:both;"></div>
+                <!-- End of Featured Products -->
+			</div>

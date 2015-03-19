@@ -1,0 +1,109 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300');
+#searchAndCart{z-index:0;}
+#mainMenu{z-index:9997;}
+
+#profileMenu
+{
+  	position: relative;
+	z-index: 9999;
+	float:right;
+	margin-top:2px;
+	width:170px;
+}
+
+#profileName{width:170px; position:absolute;}
+
+#admin
+{
+	width: 145px;
+	float:left;
+  	color: #666;
+  	border: none;
+	border-radius: 3px;
+	padding: 0 0 0 10px;
+	cursor: default;
+  	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+  	margin-bottom: 7px;
+	text-align:right;
+	font-size:13px;
+}
+
+#settings
+{
+	top: 0;
+	right: 0;
+  	border: none;
+  	outline: none;
+	color: #666;
+	font-size: 20px;
+	cursor: pointer;
+	width:15px;
+	float:right;
+	text-align:right;
+}
+
+#settings:hover{color:#555;}
+
+#menu{display:none; clear:both; margin-top:20px; position:absolute; z-index:9999;}
+
+#menu a:link, #menu a:visited
+{
+	display: block;
+	background: #F8F8F8;
+	width: 160px;
+  	height: 40px;
+	padding: 0 0 0 10px;
+	text-transform:capitalize;
+	font-weight:normal;
+	color: #888;
+	line-height: 40px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	font-size:13px;
+}
+
+#menu a:nth-child(2)
+{
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+#menu a:last-child
+{
+  	border-bottom-left-radius: 3px;
+	  border-bottom-right-radius: 3px;
+}
+
+#menu a:hover{color:#555;}
+
+#menu a:hover > .fa { color:#a4ca00;}
+
+#firstIcon, #secondIcon, #thirdIcon, #fourthIcon, #fifthIcon, #sixthIcon
+{
+  	position: absolute;
+	  margin-top: 10px;
+	  right: 0;
+  	font-size: 20px;
+	  color: rgba(0, 0, 0, 0.4);
+	  opacity: 0.7;
+}
+
+#firstIcon{margin-right:14px;}
+#secondIcon{margin-right:11px;}
+#thirdIcon{margin-right:11px;}
+#fourthIcon{margin-right:13px;}
+#fifthIcon{margin-right:12px;}
+#sixthIcon{margin-right: 12px;}
+
+#arrow
+{
+	  width: 0;
+	  height: 0;
+	  border-left: 7px solid transparent;
+	  border-right: 7px solid transparent;
+	  border-bottom: 9px solid #F8F8F8;
+  	  margin-left: 155px;
+}

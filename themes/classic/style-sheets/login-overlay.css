@@ -1,0 +1,72 @@
+.overlay-bg, .overlay-bg-signup, .overlay-bg-best-price {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:100%;
+	width: 100%;
+	cursor: pointer;
+	z-index: 9999; /* high z-index */
+	background: #000; /* fallback */
+	background: rgba(0,0,0,0.75);
+}
+	.overlay-content, .overlay-content-signup, .overlay-content-best-price  {
+		display: none;
+		background: #fff;
+		padding: 1%;
+		width: 635px;
+		height:280px;
+		position: relative;
+		margin:0 auto; padding:0;
+		cursor: default;
+		box-shadow: 0 0 5px rgba(0,0,0,0.9);
+		padding:15px;
+		background-color:#FFF;
+	}
+
+
+/* media query for most mobile devices */
+@media only screen and (min-width: 0px) and (max-width: 480px){
+
+	.overlay-content, .overlay-content-signup, .overlay-content-best-price{
+		width: 100%;
+		margin: 0 2%;
+		left: 0;
+	}
+}
+
+a#popupCloseBtn:link, a#popupCloseBtn:visited{float:right; margin-top:-50px; margin-right:-40px; font-size:20px; color:#888;}
+#loginHeader{height:30px; border-bottom:1px solid #bbb;}
+#loginLeftHeader{float:left;}
+#loginRightHeader{float:right;}
+
+#loginContents{margin-top:32px;}
+#signupContents{margin-top:12px;}
+#loginLeft{width:370px; float:left;}
+#signupContents #loginLeft{margin-top:10px;}
+#loginMiddle{width:29px; margin-left:16px; float:left;}
+#signupContents #loginMiddle{margin:20px 0 0 16px;}
+#loginRight{width:150px; height:40px; margin-top:24px; float:right; text-align:center;}
+#signupContents #loginRight{margin-top:44px;}
+
+#loginRight p{text-align:center; margin-bottom:5px; font-weight:bold;}
+#loginRight img{margin-bottom:10px;}
+
+form#loginForm{width:350px; height:150px;}
+#signupContents form#loginForm{width:350px; height:200px;}
+form#loginForm span{width:93px; line-height:36px; float:left; margin-top:10px;}
+form#loginForm input{width:250px; height:36px; float:right; margin:10px 0 0 7px; padding-left:5px; font-size:13px; border:1px solid #CCC;}
+form#loginForm input.signupPwds{width:120px;}
+form#loginForm input#signupPwd{float:left;}
+form#loginForm input#signupCnfPwd{}
+form#loginForm input.chkBxes{float:left; width:10px; height:10px; margin-top:15px;}
+form#loginForm span.chkboxSp{width:335px; float:right; line-height:12px; margin-top:15px;}
+
+form#loginForm input.loginFormBtn{padding-left:0; background-color:#14bfcc; width:96px; height:30px; color:#FFF; border:0; text-transform:uppercase; margin-right:75px; transition:background-color 0.8s ease;}
+form#loginForm input.loginFormBtn:hover{background-color:#ff5757;}
+
+a#forgotPwd:link, a#forgotPwd:visited{color:#0194bf; text-transform:uppercase; margin-left:160px;}
+
+a#signUpLink:link, a#signUpLink:visited{color:#222; font-weight:bold;}
+
+

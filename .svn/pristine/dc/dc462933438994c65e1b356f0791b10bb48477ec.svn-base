@@ -1,0 +1,63 @@
+<?php /* @var $this Controller */ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+
+	<!-- blueprint CSS framework -->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/print.css" media="print" />
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/ie.css" media="screen, projection" />
+	<![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/form.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/admin-home.css"/>
+
+	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+</head>
+
+<body>
+
+<div class="container" id="page">
+
+	<div id="header">
+		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?> Admin Panel</div>
+        <div style="clear: both; text-align:right; color:#999; font-weight:bold; margin: 0 5px 5px 0;">Last logged in:&nbsp;&nbsp;<?=Yii::app()->user->past > 0 ? date("F j Y, g:i a", Yii::app()->user->past): ''?></div>
+	</div><!-- header -->
+	<?php  if(Yii::app()->controller->id == 'default') { ?>
+	<hr />
+	<?php } else { ?>
+	<div id="mainmenu">
+		<?php $this->widget('zii.widgets.CMenu',array(
+			'items'=>array(
+				array('label'=>'Home', 'url'=>array('/admin')),
+                array('label'=>'Brands', 'url'=>array('/admin/brands/admin')),
+				array('label'=>'Categories', 'url'=>array('/admin/categories/admin')),
+				array('label'=>'Sub Categories', 'url'=>array('/admin/subcategories/admin')),
+				array('label'=>'Product Types', 'url'=>array('/admin/producttype/admin')),
+				array('label'=>'Custom Menu Items', 'url'=>array('/admin/menuitems/admin')),
+				array('label'=>'Products', 'url'=>array('/admin/products/admin')),
+				array('label'=>'Stores', 'url'=>array('/admin/stores/admin')),
+               // array('label'=>'Settings', 'url'=>array('/admin/settings/admin')),
+                array('label'=>'Logout', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+			),
+		)); ?>
+	</div><!-- mainmenu -->
+	<?php } ?>
+
+	<?php echo $content; ?>
+
+	<div class="clear"></div>
+
+	<div id="footer">
+		Copyright &copy; <?php echo date('Y'); ?> by <?php echo Yii::app()->name; ?>.<br/>
+		All Rights Reserved.<br/>
+	</div><!-- footer -->
+
+</div><!-- page -->
+<script type="text/javascript" src="<?=Yii::app()->theme->baseUrl?>/js/jquery.stringToSlug.min.js"></script>
+</body>
+</html>

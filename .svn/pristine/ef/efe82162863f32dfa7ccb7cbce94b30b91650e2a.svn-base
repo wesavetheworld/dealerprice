@@ -1,0 +1,183 @@
+<?php
+
+class SiteController extends Controller
+{
+	public function init()
+    {
+        Yii::app()->clientScript->registerCoreScript('jquery', CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerCoreScript('jquery.ui', CClientScript::POS_HEAD);
+    }
+	/**
+	 * Declares class-based actions.
+	 */
+	public function actions()
+	{
+		return array(
+			// captcha action renders the CAPTCHA image displayed on the contact page
+			'captcha'=>array(
+				'class'=>'CCaptchaAction',
+				'backColor'=>0xFFFFFF,
+			),
+			// page action renders "static" pages stored under 'protected/views/site/pages'
+			// They can be accessed via: index.php?r=site/page&view=FileName
+			'page'=>array(
+				'class'=>'CViewAction',
+			),
+		);
+	}
+
+	/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
+	public function actionIndex()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		 $this->pageTitle='Dealer Price';
+		$this->render('index');
+	}
+
+	public function actionProducts($url)
+	{
+		$this->pageTitle=$url;
+		$this->layout = "products";
+		$this->render('show-products');
+	}
+	public function actionAllproducts($subCatUrl, $url)
+	{
+		$this->pageTitle=$subCatUrl.' - '.$url;
+		$this->layout = "products";
+		$this->render('show-products');
+	}
+
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			if(Yii::app()->request->isAjaxRequest)
+				echo $error['message'];
+			else
+				$this->render('error', $error);
+		}
+	}
+
+	/**
+	 * Displays the contact page
+	 */
+	public function actionContact()
+	{
+		$model=new ContactForm;
+		if(isset($_POST['ContactForm']))
+		{
+			$model->attributes=$_POST['ContactForm'];
+			if($model->validate())
+			{
+				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$headers="From: $name <{$model->email}>\r\n".
+					"Reply-To: {$model->email}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-Type: text/plain; charset=UTF-8";
+
+				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				$this->refresh();
+			}
+		}
+		$this->render('contact',array('model'=>$model));
+	}
+
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+                        $validate=$model->validate();
+                        $login=$model->login();
+			// validate user input and redirect to the previous page if valid
+                        if($validate && $login)
+                        {
+                            if(Yii::app()->user->role=='SuperAdmin' || Yii::app()->user->role=='Admin')
+                            {
+                               echo CJSON::encode(array('status'=>'success', 'redirect'=>  $this->createAbsoluteUrl('/admin')));
+                               Yii::app()->end();
+                            }
+                            else
+                            {
+                                echo CJSON::encode(array('status'=>'success', 'redirect'=>Yii::app()->user->returnUrl));
+                                Yii::app()->end();
+                            }
+                        }
+                        else
+                        {
+                            $error = CActiveForm::validate($model);
+                            if($error!='[]')
+                                echo $error;
+                            Yii::app()->end();
+                        }
+		}
+		// display the login form
+                if(isset($_GET['ajax']))
+		$this->renderPartial('login',array('model'=>$model));
+                else
+		$this->render('directlogin',array('model'=>$model));
+	}
+
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
+	/* searching hints auto complete popup */
+    public function actionHints()
+	{
+		if(isset($_GET['term']))
+		{
+			$temp=array();
+			$match = addcslashes($_GET['term'], '%_');
+			$q = new CDbCriteria( array(
+				'condition' => "name LIKE :match",      // DON'T do it this way!
+				'params'    => array(':match' => '%'.$match.'%')
+			));
+			$cat=  Categories::model()->findAll($q);
+			$sub_cat= SubCategories::model()->findAll($q);
+			$com= Brands::model()->findAll($q);
+			$menus= MenuItems::model()->findAll($q);
+			$prodtype= ProductType::model()->findAll($q);
+			$prod= Products::model()->findAll($q);
+			if(isset($cat))
+			foreach($cat as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($sub_cat))
+			foreach($sub_cat as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($com))
+			foreach($com as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($menus))
+			foreach($menus as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($prod))
+			foreach($prod as $c)
+				array_push($temp, array('id'=>$c->id,'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($prodtype))
+			foreach($prodtype as $c)
+				array_push($temp, array('id'=>$c->id,'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			echo CJSON::encode($temp);
+		}
+		Yii::app()->end();
+	}
+}

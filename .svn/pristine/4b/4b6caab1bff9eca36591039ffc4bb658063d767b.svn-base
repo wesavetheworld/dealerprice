@@ -1,0 +1,74 @@
+.overlay-bg, .overlay-bg-signup {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:100%;
+	width: 100%;
+	cursor: pointer;
+	z-index: 9999; /* high z-index */
+	background: #000; /* fallback */
+	background: rgba(0,0,0,0.75);
+}
+	.overlay-content, .overlay-content-signup {
+		display: none;
+		background: #fff;
+		padding: 1%;
+		width: 635px;
+		height:310px;
+		position: relative;
+		margin:0 auto; padding:0;
+		cursor: default;
+		border-radius: 4px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.9);
+		padding:15px;
+		background-color:#FFF; background-image:url(../images/header-bg-2.png);
+		border:10px solid #555;
+	}
+
+
+/* media query for most mobile devices */
+@media only screen and (min-width: 0px) and (max-width: 480px){
+
+	.overlay-content, .overlay-content-signup{
+		width: 100%;
+		margin: 0 2%;
+		left: 0;
+	}
+}
+
+#loginFormOverlay a.popupCloseBtn:link{float:right; margin-top:-40px; margin-right:-40px;}
+#signupFormOverlay a.popupCloseBtn:link{float:right; margin-top:-65px; margin-right:-40px;}
+.loginHeader{height:30px; border-bottom:1px solid #bbb;}
+.loginLeftHeader{float:left;}
+.loginRightHeader{float:right;}
+
+.loginContents{margin-top:45px;}
+.signupContents{margin-top:25px;}
+.loginLeft{width:370px; float:left;}
+.signupContents .loginLeft{margin-top:10px;}
+.loginMiddle{width:29px; margin-left:16px; float:left;}
+.signupContents .loginMiddle{margin:20px 0 0 16px;}
+.loginRight{width:220px; height:40px; margin-top:24px; float:right; text-align:center;}
+.signupContents .loginRight{margin-top:44px;}
+
+.loginRight p{text-align:center; margin-bottom:5px; font-weight:bold;}
+
+form#loginForm{width:350px; height:150px;}
+.signupContents form#signupForm{width:350px; height:200px;}
+form#loginForm span, form#signupForm span{width:93px; line-height:38px; float:left; margin-top:10px;}
+form#loginForm input, form#signupForm input{width:248px; height:36px; float:right; margin-top:10px; padding-left:5px; font-size:14px;}
+form#loginForm input#LoginForm_rememberMe{width:15px; height:15px; margin-top:5px; float:left; margin-right:5px;}
+p#rememberMeP{margin-top:10px; line-height:25px;}
+form#signupForm input.signupPwds{width:120px;}
+form#signupForm input#signupPwd{float:left;}
+form#signupForm input#signupCnfPwd{}
+form#signupForm input.chkBxes{float:left; width:10px; height:10px; margin-top:15px;}
+form#signupForm span.chkboxSp{width:335px; float:right; line-height:12px; margin-top:15px;}
+
+form#loginForm input.loginFormBtn, form#signupForm input.loginFormBtn{padding-left:0; background-color:#00a950; width:96px; height:30px; color:#FFF; border:0; text-transform:uppercase; margin-right:75px;}
+
+a#forgotPwd:link, a#forgotPwd:visited{color:#0194bf; text-transform:uppercase; margin-left:160px;}
+
+a.signUpLink:link, a.signUpLink:visited{color:#222; font-weight:bold;}
+.errorMessage{clear: both; color: red; font-size: 11px;}

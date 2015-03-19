@@ -1,0 +1,89 @@
+.ui-autocomplete-loading {background: white url("../images/ui-anim_basic_16x16.gif") right center no-repeat;}
+.ui-menu .ui-menu-item{ display:inline-block; width:100%;}
+.ui-menu-item span{color:#ff9805;font-weight: bold;}
+
+#product-reviews-form input, #product-reviews-form button, #product-reviews-form textarea{  border: 1px solid #dcdcdc !important; }
+	form .stars {
+  background: url("../images/stars.png") repeat-x 0 0;
+  width: 150px;
+}
+
+form .stars input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+form .stars input[type="radio"].star-5:checked ~ span {
+  width: 100%;
+}
+form .stars input[type="radio"].star-4:checked ~ span {
+  width: 80%;
+}
+form .stars input[type="radio"].star-3:checked ~ span {
+  width: 60%;
+}
+form .stars input[type="radio"].star-2:checked ~ span {
+  width: 40%;
+}
+form .stars input[type="radio"].star-1:checked ~ span {
+  width: 20%;
+}
+form .stars label {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 0!important;
+  padding: 0!important;
+  text-indent: -999em;
+  float: left;
+  position: relative;
+  z-index: 10;
+  background: transparent!important;
+  cursor: pointer;
+}
+form .stars label:hover ~ span {
+  background-position: 0 -30px;
+}
+form .stars label.star-5:hover ~ span {
+  width: 100% !important;
+}
+form .stars label.star-4:hover ~ span {
+  width: 80% !important;
+}
+form .stars label.star-3:hover ~ span {
+  width: 60% !important;
+}
+form .stars label.star-2:hover ~ span {
+  width: 40% !important;
+}
+form .stars label.star-1:hover ~ span {
+  width: 20% !important;
+}
+form .stars span {
+  display: block;
+  width: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 30px;
+  background: url("../images/stars.png") repeat-x 0 -60px;
+  -webkit-transition: -webkit-width 0.5s;
+  -moz-transition: -moz-width 0.5s;
+  -ms-transition: -ms-width 0.5s;
+  -o-transition: -o-width 0.5s;
+  transition: width 0.5s;
+}
+
+
+/* Review Page */
+.reviewForm{width:1020px; padding:10px; margin:0 auto; padding:0; background-color:#FFF;}
+.reviewForm h2{font-size:16px; font-weight:bold;}
+
+.reviewForm  form#product-reviews-form{width:700px; margin-top:20px;}
+.reviewForm  form#product-reviews-form label{line-height:30px; font-weight:bold;}
+.reviewForm  form#product-reviews-form input, .reviewForm  form#product-reviews-form textarea{float:right; width:500px; height:30px; resize:none; padding-left:5px;}
+.reviewForm  form#product-reviews-form textarea{height:150px;}
+.reviewForm  form#product-reviews-form .buttons input{background-color:#00a950; border:0 none; color:#fff; height:35px; width:80px; float:right;}
+.reviewForm  form#product-reviews-form .stars{float:right;}
+.reviewForm  form#product-reviews-form .row{height:40px;}
+.reviewForm  form#product-reviews-form .reviewMsg{height:155px;}

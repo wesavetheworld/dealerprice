@@ -1,0 +1,34 @@
+/* CSS Document */
+#adminDashboard{width:910px; padding:10px; margin:0 auto; padding:0;}
+#orderStats{border-bottom:1px solid #CCC;}
+#orderStats h2{font-size:16px; font-family:Calibri; text-transform:uppercase; border-bottom:1px solid #666; margin:0 0 5px 0; padding-bottom:5px; color:#222;}
+#orderStats p{font-size:14px; font-family:Calibri; color:#222;}
+#orderStats p span{float:right;}
+#orderStats p.totalNo{font-weight:bold; border-top:1px dotted #666; padding-top:7px;}
+#orderStats p.outOfStock{color:#F00;}
+.stats{width:200px; height:250px; float:left; padding:10px; margin-right:5px;}
+.statsContents{height:200px; overflow:auto; padding-right:10px;}
+
+#dashboardIcons{padding-top:20px;}
+.adminIcon{width:110px; height:100px; float:left; margin-bottom:20px;}
+.adminIcon a:link{width:120px; height:100px; display:block; text-indent:-9999px; }
+a#propertyIcon:link{background-image:url(../images/admin-icon-1.png);}
+#featuredPropertiesAdmin a:link{background-image:url(../images/admin-icon-2.png);}
+#subcategories a:link{background-image:url(../images/admin-icon-4.png);}
+#stocks a:link{background-image:url(../images/admin-icon-5.png);}
+#tax a:link{background-image:url(../images/admin-icon-14.png);}
+#users a:link{background-image:url(../images/admin-icon-6.png);}
+#crawler a:link{background-image:url(../images/crawler.png);}
+#products a:link{background-image:url(../images/admin-icon-11.png);}
+#sms a:link{background-image:url(../images/admin-icon-9.png);}
+#emailAdmin a:link{background-image:url(../images/admin-icon-10.png);}
+#categories a:link{background-image:url(../images/admin-icon-3.png);}
+#featuredProducts a:link{background-image:url(../images/admin-icon-12.png);}
+#config a:link{background-image:url(../images/admin-icon-13.png);}
+#coupons a:link{background-image:url(../images/admin-icon-19.png);}
+#emailList a:link{background-image:url(../images/admin-icon-15.png);}
+#submitTicket a:link{background-image:url(../images/admin-icon-16.png);}
+#careerAdmin a:link{background-image:url(../images/admin-icon-17.png);}
+#systemUsers a:link{background-image:url(../images/admin-icon-18.png);}
+#reviews a:link{background-image:url(../images/admin-icon-20.png);}
+
