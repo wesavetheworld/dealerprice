@@ -1,0 +1,104 @@
+<!-- End of Header -->
+            <div id="pageHeader">
+                <div id="innerPageHeader">
+                    <div id="mainMenuBtn">
+                        <span id="allCatBtn">
+                            <i class="fa fa-th-large"></i><a href="#">All Categories</a>
+                        </span>
+                    </div>
+                    <!-- End of Main Menu Button -->
+                    <div id="breadcrumb">
+
+						<div id="breadcrumbItm">
+                            <span id="bcPnt"><?=CHtml::link("Home", array('/site/index')); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm lastItm"><?=CHtml::link('Wishlist', array('/customer/default/wishlist')); ?></span>
+                        </div>
+						
+                    </div>
+                    <!-- End of Breadcrumb -->
+                </div>    
+            </div>
+            <div id="pageMegaMenu">
+                <div id="megaMenu" class="pageMenu">
+               		<?php $this->beginContent('//layouts/mega-menu'); $this->endContent(); ?>
+                </div>  
+                <!-- End of Mega Menu -->
+            </div>
+            <!-- End of Menu and Slider -->
+			<div id="pageContents" class="page">
+                <div id="menuPanel">
+                    <div id="menuPanelItems">
+                    	<ul>
+                            <li><a href="<?=$this->createUrl('/customer/default/index')?>">My Account</a></li>
+                            <li><a href="<?=$this->createUrl('/customer/default/wishlist')?>">Wishlist</a></li>
+                            <li><a href="<?=$this->createUrl('/site/logout')?>">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="contentPanel">
+                    <div id="panelContents">
+					<?php if(isset($wishlist) && !empty($wishlist)) { ?>
+                        <ul>
+                        	<!-- Start of Item -->
+							<?php foreach($wishlist as $w) {?>
+                            <li><a href="<?=$this->createUrl('/site/products', array('url'=>$w->product->url))?>">
+                                <div class="wishlistItem">
+                                    <div class="wItmImg">
+									<?php $images = json_decode($w->product->images); ?>
+                                        <img id="img_zoom" src="<?=$images[0]->normal?>" alt="" width="200" height="200">
+                                    </div>
+                                    <div class="titleAndDesc">
+                                        <div class="wTItle">
+                                            <h3><?=$w->product->name?></h3>
+                                        </div>
+                                        <div class="wItmDesc">
+                                            <?=$w->product->key_features?>
+                                        </div>
+                                    </div>
+                                    </a>
+                                    <div class="fItmPriceNBtn">
+                                        <div class="fItmPrice">
+										<?php if($w->product->productPrice->discount > 0 && $w->product->productPrice->mrp > 0){ ?>
+										<span class="disPrice">Rs.<?=number_format($w->product->productPrice->mrp)?></span> <span class="disPer">(<?=$w->product->productPrice->discount?>% off)</span>
+										<?php } ?>
+                                            
+											<span class="buyPrice">Rs.<?=number_format($w->product->productPrice->price)?></span>	
+                                        </div>
+                                        <div class="wishlist">
+                                            <p class='remove_item_wishlist' data-pid="<?=$w->product->id?>"><i class="fa fa-times-circle"></i> from wishlist</p>
+                                        </div>
+                                    </div>
+                                    <div class="addToCart">
+                                        <div class="wishlistAndCart">
+                                            <div class="cartBtn">
+                                                <button class="button_blue middle_btn wishlist_buy" data-purl="<?=$this->createAbsoluteUrl('/site/products', array('url'=>$w->product->url))?>">BUY NOW</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- End of Item -->
+							<?php } ?>
+                        </ul>
+						<?php } else { ?>
+						<div><h1>Your wishlist is empty...!</h1></div>
+						<?php } ?>
+						
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+			</div>
+			<!-- End of Page Contents -->
+			<script type="text/javascript">
+			$(function(){
+			$(document).on('click', '.remove_item_wishlist', function(){
+					var url = "<?=$this->createUrl('/site/removewishlist')?>";
+					var obj = $(this);
+					$.post(url,{pid: $(obj).attr('data-pid')}, function(d){ d = $.parseJSON(d); if(d.status == "success") $(obj).closest('li').remove(); });
+					return false;
+				});
+			$(document).on('click', '.wishlist_buy', function(){
+				if($(this).attr('data-purl'))
+				window.location=$(this).attr('data-purl');
+			});
+			});
+			</script>

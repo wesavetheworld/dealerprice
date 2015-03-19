@@ -1,0 +1,83 @@
+<!-- End of Header -->
+            <!-- End of Header -->
+            <div id="pageHeader">
+                <div id="innerPageHeader">
+                    <div id="mainMenuBtn">
+                        <span id="allCatBtn">
+                            <i class="fa fa-th-large"></i><a href="#">All Categories</a>
+                        </span>
+                    </div>
+                    <!-- End of Main Menu Button -->
+                    <div id="breadcrumb">
+
+						<div id="breadcrumbItm">
+                            <span id="bcPnt"><?=CHtml::link("Home", array('/site/index')); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm lastItm"><?=CHtml::link('My Account', array('/customer/default/index')); ?></span>
+                        </div>
+
+                    </div>
+					<!-- End of Breadcrumb -->
+					<div id="sorting">
+						<div id="sortMenu">
+						<div style="clear: both; text-align:right; color:#999; font-weight:bold;">Last logged in:&nbsp;&nbsp;<?=Yii::app()->user->past > 0 ? date("F j Y, g:i a", Yii::app()->user->past): ''?></div>
+						</div>
+					</div>
+                    
+                </div>    
+            </div>
+            <div id="pageMegaMenu">
+                <div id="megaMenu" class="pageMenu">
+               		<?php $this->beginContent('//layouts/mega-menu'); $this->endContent(); ?>
+                </div>  
+                <!-- End of Mega Menu -->
+            </div>
+            <!-- End of Menu and Slider -->
+			<div id="pageContents" class="page">
+                <div id="menuPanel">
+                    <div id="menuPanelItems">
+                    	<ul>
+							<li><a href="<?=$this->createUrl('/customer/default/index')?>">My Account</a></li>
+                            <li><a href="<?=$this->createUrl('/customer/default/wishlist')?>">Wishlist</a></li>
+                            <li><a href="<?=$this->createUrl('/site/logout')?>">Logout</a></li>
+						</ul>
+                    </div>
+                </div>
+                <div id="contentPanel">
+                    <div id="panelContents">
+                        <div id="contentPanelMenu">
+                            <ul>
+                                <li><a href="<?=$this->createUrl('/customer/default/index')?>"  id="actCntPnlMenu">Personal Details</a></li>
+                                <li><a href="<?=$this->createUrl('/customer/default/changepass')?>">Change Password</a></li>
+                                <li><a href="<?=$this->createUrl('/customer/default/changemail')?>">Change Email</a></li>
+                            </ul>
+                        </div>
+                    	<div id="errorSum"></div>
+                        <?php $u= Users::model()->with('profiles')->findByPk(Yii::app()->user->id); ?>
+                    	<form id="personalDetails" class="accountForms" method="post" action="<?=$this->createAbsoluteUrl('/customer/default/personal')?>">
+                        	<label><span>Email</span>
+                            <input type="email" id="email" name="email" required readonly value="<?=$u->email?>" class="readOnlyInput"></label>
+                        	<label><span>Name*</span>
+                            <input type="text" id="name" name="name" value="<?=$u->name?>" required></label>
+                            <label><span>Phone No*</span>
+                            <input type="text" id="phoneNo" name="phone_no" value="<?=isset($u->profiles->phone) ? $u->profiles->phone : ''?>" required placeholder="10 Digit Number"></label>
+                            <label><span>Gender</span>
+                            <select id="gender" name="gender">
+                            	<option value="0" selected>--Select--</option>
+                            	<option value="Male" <?=isset($u->profiles->gender) && $u->profiles->gender == 'Male' ? 'selected':''?>>Male</option>
+                                <option value="Female" <?=isset($u->profiles->gender) && $u->profiles->gender == 'Female' ? 'selected':''?>>Female</option>
+                            </select></label><div style="clear: both"></div>
+           <?php echo CHtml::ajaxSubmitButton('SAVE CHANGES',CHtml::normalizeUrl(array('/customer/default/personal')),
+             array(
+                 'dataType'=>'json',
+                 'type'=>'post',
+                 'success'=>'function(data) {
+                    $("#submitProfile").removeAttr("disabled");
+                    if(data.status=="success")
+                    $("#errorSum").text("Personal details successfully updated.").css({"color": "green", "display":"block"}).delay(5000).fadeOut();
+                }',
+                'beforeSend'=>'function(){ $("#submitProfile").attr("disabled","disabled");  }'),array('id'=>'submitProfile','class'=>'accSubmits', 'name'=>'submitAcc')); ?>
+                        </form>
+                        
+                    </div>
+                </div>
+			</div>
+			<!-- End of Page Contents -->

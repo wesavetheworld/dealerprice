@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/style.css">
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/cs-select.css" />
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/cs-skin-elastic.css" />
-<link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/jquery.sliderTabs.css">
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/owl.carousel.css">
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/jquery-ui.css">
 <link rel="stylesheet" href="<?=Yii::app()->theme->baseUrl?>/style-sheets/style-reset.css">
@@ -31,6 +30,7 @@
 	<div id="wrap">
     	<div id="container">
         	<div id="header">
+
 				<div id="innerHeader">
                     <div id="topHeaderMenu">
 						<div id="innerTopHeaderMenu">
@@ -107,7 +107,7 @@
 										));
 										?>
 										</label><!--
-	--><label>						    <select id="selectCategories" name="cat" class="cs-select cs-skin-elastic">
+	--><label><select id="selectCategories" name="cat" class="cs-select cs-skin-elastic">
 										<option value="all">All Categories</option>
 										<?php
 										$cat = Categories::model()->findAll();
@@ -128,6 +128,7 @@
                     </div>    
                 </div>
             </div>
+
 			<?php echo $content; ?>
 			<!-- End of Home Contents -->
 			<div id="footer">
@@ -171,10 +172,10 @@
 				</div>
 				<!-- End of Footer Nav -->
 			</div
-			<!-- End of Footer -->
-			 <div class="menuPopupOverlay"></div>
+			><!-- End of Footer -->
+            <div class="menuPopupOverlay"></div>
          </div>
-		 <!-- End of Container -->
+		<!-- End of Best Price Alert -->
 		 <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
     </div>
 	<!-- End of Wrap -->
@@ -183,13 +184,8 @@
 <script src="<?=Yii::app()->theme->baseUrl?>/scripts/profile-menu.js"></script>
 <script src="<?=Yii::app()->theme->baseUrl?>/scripts/login-overlay.js"></script>
 <script src="<?=Yii::app()->theme->baseUrl?>/scripts/classie.js"></script>
-<script src="<?=Yii::app()->theme->baseUrl?>/scripts/jquery.appear.js"></script>
-<script src="<?=Yii::app()->theme->baseUrl?>/scripts/owl.carousel.min.js"></script>
 <script src="<?=Yii::app()->theme->baseUrl?>/scripts/selectFx.js"></script>
-<script src="<?=Yii::app()->theme->baseUrl?>/scripts/jquery.sliderTabs.js"></script>
-<!--<script src="<?=Yii::app()->theme->baseUrl?>/scripts/queryloader2.min.js" type="text/javascript"></script>-->
-<script src="<?=Yii::app()->theme->baseUrl?>/scripts/theme.plugins.js"></script>
-<script src="<?=Yii::app()->theme->baseUrl?>/scripts/theme.core.js"></script>
+
 <script>
 	(function() {
 		[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
@@ -198,21 +194,24 @@
 	})();
 </script>    
 <script>
-var slider = $("div#sliderTabs").sliderTabs({
-  autoplay: false,
-  mousewheel: false,
-  position: "bottom"
+var cancel = false;
+$("div#megaMenu").hide();
+$("span#allCatBtn").hover(function(){
+    $("div#megaMenu").show();
+    $("div.menuPopupOverlay").addClass('showOverlay');
 });
-</script>
-<script>
-
 $("div#megaMenu").hover(function(){
+    $("div#megaMenu").show();
     $("div.menuPopupOverlay").addClass('showOverlay');
 });
 $("div#megaMenu").mouseleave(function(){
+    $("div#megaMenu").hide();
     $("div.menuPopupOverlay").removeClass('showOverlay');
 });
-
+$("span#allCatBtn").mouseleave(function(){
+    $("div#megaMenu").hide();
+    $("div.menuPopupOverlay").removeClass('showOverlay');
+});
 </script>
 </body>
 </html>
