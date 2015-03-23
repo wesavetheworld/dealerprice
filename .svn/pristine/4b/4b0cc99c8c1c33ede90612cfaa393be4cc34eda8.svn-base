@@ -1,0 +1,617 @@
+<?php
+
+class SiteController extends Controller
+{
+	public function init()
+    {
+        Yii::app()->clientScript->registerCoreScript('jquery', CClientScript::POS_HEAD);
+        Yii::app()->clientScript->registerCoreScript('jquery.ui', CClientScript::POS_HEAD);
+    }
+	/**
+	 * Declares class-based actions.
+	 */
+	public function actions()
+	{
+		return array(
+			// captcha action renders the CAPTCHA image displayed on the contact page
+			'captcha'=>array(
+				'class'=>'CCaptchaAction',
+				'backColor'=>0xFFFFFF,
+			),
+			// page action renders "static" pages stored under 'protected/views/site/pages'
+			// They can be accessed via: index.php?r=site/page&view=FileName
+			'page'=>array(
+				'class'=>'CViewAction',
+			),
+		);
+	}
+
+	/**
+	 * This is the default 'index' action that is invoked
+	 * when an action is not explicitly requested by users.
+	 */
+	public function actionIndex()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+		$this->pageTitle='Dealer Price';
+		$this->render('index');
+	}
+
+	public function actionCategory($url)
+	{
+		if(!isset($_GET['ajax']))
+		$this->layout = "products";
+		
+		$discount = isset($_GET['discount']) ? $_GET['discount'] : null;
+        $types = isset($_GET['types']) ? $_GET['types'] : null;
+        $brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+		$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+		$sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+				 
+		$cat = Categories::model()->findByAttributes(array('url'=>$url));
+		if(isset($cat))
+		$this->pageTitle=$cat->name;
+	
+		$q = new CDbCriteria;
+		
+		$q->addCondition('productDetails.product_id is not null');
+		
+		$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
+		$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
+
+		 $q->limit=12;
+		 if(isset($limit))
+		 $q->offset = $limit;
+		 if(isset($discount))
+		  {
+			$temp=  explode('-', $discount);
+			$q->addBetweenCondition('productDetails.discount', $temp[0], $temp[1], 'AND');
+		  }
+		  if(isset($types) && $types !='all')
+		  {
+			  $temp = explode('-', $types);
+			  $q->addInCondition('types.id', $temp, 'AND');
+		  }
+		  if(isset($brand) && $brand !='all')
+		  {
+			  $temp = explode('-', $brand);
+			  $q->addInCondition('brands.id', $temp, 'AND');
+		  }
+		  if(isset($sort) && $sort =='High')
+			  $q->order='productDetails.price DESC';
+		  if(isset($sort) && $sort =='Low')
+			  $q->order='productDetails.price';
+		  if(isset($sort) && $sort =='Discount')
+			  $q->order='productDetails.discount';
+		  if(isset($sort) && $sort =='New')
+			  $q->order='products.id DESC';
+		
+		$q->together = true;
+		$q->alias="products";
+		$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
+		$products = Products::model()->findAll($q);
+		
+		if(isset($_GET['ajax']))
+		$this->renderPartial('product-ajax', array('products'=>$products));
+		else	
+		$this->render('category', array('products'=>$products, 'category'=>$cat));
+	}
+	public function actionSubcategory($url)
+	{
+		if(!isset($_GET['ajax']))
+		$this->layout = "products";
+		
+		$discount = isset($_GET['discount']) ? $_GET['discount'] : null;
+        $types = isset($_GET['types']) ? $_GET['types'] : null;
+        $brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+		$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+		$sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+				 
+		$subcat = SubCategories::model()->with('category')->findByAttributes(array('url'=>$url));
+		
+		if(isset($subcat))
+		$this->pageTitle=$subcat->name;
+	
+		$q = new CDbCriteria;
+		
+		$q->addCondition('productDetails.product_id is not null');
+		
+		$q->addSearchCondition('typessubCategory.url', $url, true, 'AND', 'LIKE');
+		$q->addSearchCondition('brandssubCategory.url', $url, true, 'OR', 'LIKE');
+
+		 $q->limit=12;
+		 if(isset($limit))
+		 $q->offset = $limit;
+		 if(isset($discount))
+		  {
+			$temp=  explode('-', $discount);
+			$q->addBetweenCondition('productDetails.discount', $temp[0], $temp[1], 'AND');
+		  }
+		  if(isset($types) && $types !='all')
+		  {
+			  $temp = explode('-', $types);
+			  $q->addInCondition('types.id', $temp, 'AND');
+		  }
+		  if(isset($brand) && $brand !='all')
+		  {
+			  $temp = explode('-', $brand);
+			  $q->addInCondition('brands.id', $temp, 'AND');
+		  }
+		  if(isset($sort) && $sort =='High')
+			  $q->order='productDetails.price DESC';
+		  if(isset($sort) && $sort =='Low')
+			  $q->order='productDetails.price';
+		  if(isset($sort) && $sort =='Discount')
+			  $q->order='productDetails.discount';
+		  if(isset($sort) && $sort =='New')
+			  $q->order='products.id DESC';
+		
+		$q->together = true;
+		$q->alias="products";
+		$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory', 'brands.brandssubCategory');
+		$products = Products::model()->findAll($q);
+		
+		if(isset($_GET['ajax']))
+		$this->renderPartial('product-ajax', array('products'=>$products));
+		else	
+		$this->render('category', array('products'=>$products, 'subcategory'=>$subcat));
+	}
+	
+	public function actionTypes($url)
+	{
+		if(!isset($_GET['ajax']))
+		$this->layout = "products";
+		
+		$discount = isset($_GET['discount']) ? $_GET['discount'] : null;
+        $types = isset($_GET['types']) ? $_GET['types'] : null;
+        $brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+		$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+		$sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+				 
+		$mtypes = ProductType::model()->with('subCategory')->findByAttributes(array('url'=>$url));
+		
+		if(isset($mtypes))
+		$this->pageTitle=$mtypes->name;
+	
+		$q = new CDbCriteria;
+		
+		$q->addCondition('productDetails.product_id is not null');
+		
+		$q->addSearchCondition('types.url', $url, true, 'AND', 'LIKE');
+
+		 $q->limit=12;
+		 if(isset($limit))
+		 $q->offset = $limit;
+		 if(isset($discount))
+		  {
+			$temp=  explode('-', $discount);
+			$q->addBetweenCondition('productDetails.discount', $temp[0], $temp[1], 'AND');
+		  }
+		  if(isset($types) && $types !='all')
+		  {
+			  $temp = explode('-', $types);
+			  $q->addInCondition('types.id', $temp, 'AND');
+		  }
+		  if(isset($brand) && $brand !='all')
+		  {
+			  $temp = explode('-', $brand);
+			  $q->addInCondition('brands.id', $temp, 'AND');
+		  }
+		  if(isset($sort) && $sort =='High')
+			  $q->order='productDetails.price DESC';
+		  if(isset($sort) && $sort =='Low')
+			  $q->order='productDetails.price';
+		  if(isset($sort) && $sort =='Discount')
+			  $q->order='productDetails.discount';
+		  if(isset($sort) && $sort =='New')
+			  $q->order='products.id DESC';
+		
+		$q->together = true;
+		$q->alias="products";
+		$q->with = array('types', 'brands', 'productDetails');
+		$products = Products::model()->findAll($q);
+		
+		if(isset($_GET['ajax']))
+		$this->renderPartial('product-ajax', array('products'=>$products));
+		else	
+		$this->render('category', array('products'=>$products, 'mtypes'=>$mtypes));
+	}
+	
+	public function actionBrands($url)
+	{
+		if(!isset($_GET['ajax']))
+		$this->layout = "products";
+		
+		$discount = isset($_GET['discount']) ? $_GET['discount'] : null;
+        $types = isset($_GET['types']) ? $_GET['types'] : null;
+        $brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+		$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+		$sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+				 
+		$brands = Brands::model()->with('subCategory')->findByAttributes(array('url'=>$url));
+		
+		if(isset($brands))
+		$this->pageTitle=$brands->name;
+
+		$q = new CDbCriteria;
+		
+		$q->addCondition('productDetails.product_id is not null');
+		
+		$q->addSearchCondition('brands.url', $url, true, 'AND', 'LIKE');
+
+		 $q->limit=12;
+		 if(isset($limit))
+		 $q->offset = $limit;
+		 if(isset($discount))
+		  {
+			$temp=  explode('-', $discount);
+			$q->addBetweenCondition('productDetails.discount', $temp[0], $temp[1], 'AND');
+		  }
+		  if(isset($types) && $types !='all')
+		  {
+			  $temp = explode('-', $types);
+			  $q->addInCondition('types.id', $temp, 'AND');
+		  }
+		  if(isset($brand) && $brand !='all')
+		  {
+			  $temp = explode('-', $brand);
+			  $q->addInCondition('brands.id', $temp, 'AND');
+		  }
+		  if(isset($sort) && $sort =='High')
+			  $q->order='productDetails.price DESC';
+		  if(isset($sort) && $sort =='Low')
+			  $q->order='productDetails.price';
+		  if(isset($sort) && $sort =='Discount')
+			  $q->order='productDetails.discount';
+		  if(isset($sort) && $sort =='New')
+			  $q->order='products.id DESC';
+		
+		$q->together = true;
+		$q->alias="products";
+		$q->with = array('types', 'brands', 'productDetails');
+		$products = Products::model()->findAll($q);
+		
+		if(isset($_GET['ajax']))
+		$this->renderPartial('product-ajax', array('products'=>$products));
+		else	
+		$this->render('category', array('products'=>$products, 'brands'=>$brands));
+	}
+	
+	public function actionProducts($url)
+	{
+		$this->layout = "item";
+		
+		$q = new CDbCriteria();
+
+		$q->addCondition('products.url="'.$url.'"');
+		$q->together = true; 
+		$q->alias = 'products';
+		$q->with = array('types', 'brands', 'productDetails');
+		
+		$product = Products::model()->find($q);
+		$this->updateData($product);
+		$session = Yii::app()->session;
+
+		 if (!isset($session['recentIds']) || count($session['recentIds'])==0) 
+		 {
+			 $session['recentIds'] = array($product->id);
+		 }
+		 else {
+			$myarr = $session['recentIds'];
+			if(!in_array($product->id, $myarr))
+			$myarr[] = $product->id;
+			$session['recentIds'] = $myarr;
+		 }
+
+		if(isset($product))
+		$this->pageTitle=$product->name;
+		$this->render('product', array('product'=>$product));
+	}
+	public function updateData($product){
+
+		$cmd = 'java -jar '.Yii::app()->params['javaFilePath'].' '.$product->id;
+		if (substr(php_uname(), 0, 7) == "Windows"){
+			 pclose(popen('start /B '.$cmd, "r")); 
+		}
+		else {
+			 shell_exec($cmd." > /dev/null 2>/dev/null &");
+		}
+		return true;
+	}
+	public function actionSelectedstore(){
+		if(isset($_POST['id']) && !empty($_POST['id'])){
+			$productDetails = ProductDetails::model()->with('product', 'store')->findByPk($_POST['id']);
+			if(isset($productDetails)){
+			$session = Yii::app()->session;
+    		$session['redirectUrl'] = $productDetails->affiliate_url;
+			$session['affiliateSite'] = $productDetails->store->name;
+			$session['affiliateUrlId'] = $productDetails->id;
+			$session['productId'] = $productDetails->product->id;
+			echo CJSON::encode(array('status'=>'success', 'redirect'=>$this->createAbsoluteUrl('site/affiliateurl')));
+			}
+		}
+		Yii::app()->end();
+	}
+	
+	public function actionAffiliateurl(){
+		$session = Yii::app()->session;
+		if(isset($session['redirectUrl']) && !empty($session['redirectUrl']) && isset($session['affiliateSite']) && !empty($session['affiliateSite']))
+			$this->renderPartial('loading', array('store'=>$session['affiliateSite']));
+		else
+			$this->redirect(array('/site/index'));
+	}
+	public function actionStoreurl(){
+		if(Yii::app()->request->isAjaxRequest){
+			$session = Yii::app()->session;
+			$check = AffiliateTracking::model()->findByAttributes(array('product_id'=> $session['productId'], 'product_details_id'=> $session['affiliateUrlId']));
+			if(isset($check))
+			{
+				$check->counter++;
+				$check->save(false);
+			}
+			else
+			{
+				$check = new AffiliateTracking;
+				$check->product_id = $session['productId'];
+				$check->product_details_id = $session['affiliateUrlId'];
+				$check->counter = 1;
+				$check->save(false);
+			}
+			echo CJSON::encode(array('status'=>'success', 'redirect'=>$session['redirectUrl']));
+		}
+		Yii::app()->end();
+			
+	}
+	
+	 /* product search */
+	public function actionSearch($q, $cat)
+	{
+		if(isset($q) && isset($cat))
+		{
+			$this->pageTitle='Product Search';
+			$this->layout='products';
+			
+			$discount = isset($_GET['discount']) ? $_GET['discount'] : null;
+			$types = isset($_GET['types']) ? $_GET['types'] : null;
+			$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+			$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+			$sort = isset($_GET['sort']) ? $_GET['sort'] : null;
+
+			$match = $q;
+			
+			$q = new CDbCriteria();
+			$q->addCondition('productDetails.product_id is not null');
+			
+			$q->addSearchCondition('tcategory.name', $match, true, 'AND', 'LIKE');
+			$q->addSearchCondition('bcategory.name', $match, true, 'OR', 'LIKE');
+			$q->addSearchCondition('typessubCategory.name', $match, true, 'OR', 'LIKE');
+			$q->addSearchCondition('brandssubCategory.name', $match, true, 'OR', 'LIKE');
+			$q->addSearchCondition('products.name', $match, true, 'OR', 'LIKE');
+			$q->addSearchCondition('types.name', $match, true, 'OR', 'LIKE');
+			$q->addSearchCondition('brands.name', $match, true, 'OR', 'LIKE');
+			if($cat !='all'){
+				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
+				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');
+			}
+
+
+			 $q->limit=12;
+			 if(isset($limit))
+			 $q->offset = $limit;
+			 if(isset($discount))
+			  {
+				$temp=  explode('-', $discount);
+				$q->addBetweenCondition('productDetails.discount', $temp[0], $temp[1], 'AND');
+			  }
+			  if(isset($types) && $types !='all')
+			  {
+				  $temp = explode('-', $types);
+				  $q->addInCondition('types.id', $temp, 'AND');
+			  }
+			  if(isset($brand) && $brand !='all')
+			  {
+				  $temp = explode('-', $brand);
+				  $q->addInCondition('brands.id', $temp, 'AND');
+			  }
+			  if(isset($sort) && $sort =='High')
+				  $q->order='productDetails.price DESC';
+			  if(isset($sort) && $sort =='Low')
+				  $q->order='productDetails.price';
+			  if(isset($sort) && $sort =='Discount')
+				  $q->order='productDetails.discount';
+			  if(isset($sort) && $sort =='New')
+				  $q->order='products.id DESC';
+			
+			$q->together = true;
+			$q->alias="products";
+			$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory', 'types.typessubCategory.tcategory', 'brands.brandssubCategory', 'brands.brandssubCategory.bcategory');
+			
+			$products = Products::model()->findAll($q);
+			
+			if(isset($_GET['ajax']))
+			$this->renderPartial('product-ajax', array('products'=>$products));
+			else	
+			$this->render('category', array('products'=>$products, 'search'=>CHtml::encode($_GET['q'])));
+		}
+	}
+   
+    public function actionProductreviews($id)
+	{
+		if(isset($id) && !empty($id))
+		{
+			$q = new CDbCriteria;
+			$q->condition = "product_id = ".$id." AND verified = 1";
+			$q->offset = 20;
+			
+			$reviews = ProductReviews::model()->findAll($q);
+			$this->renderPartial('reviews',array('reviews'=>$reviews));
+		}
+		Yii::app()->end();
+	}
+	public function actionAddwishlist()
+	{
+		if(isset($_POST['pid']) && !empty($_POST['pid']) && !Yii::app()->user->isGuest)
+		{
+			$w=new Wishlist;
+			$w->user_id=Yii::app()->user->id;
+			$w->product_id=$_POST['pid'];
+			$w->save(false);
+			$res=array('status'=>'success');
+			echo CJSON::encode($res);
+		}
+		Yii::app()->end();
+	}
+	public function actionRemovewishlist()
+	{
+		if(isset($_POST['pid']) && !empty($_POST['pid']) && !Yii::app()->user->isGuest)
+		{
+			$w=Wishlist::model()->findByAttributes(array('user_id'=>Yii::app()->user->id, 'product_id'=>$_POST['pid']))->delete();
+			$res=array('status'=>'success');
+			echo CJSON::encode($res);
+		}
+		Yii::app()->end();
+	}
+	public function actionAlertregister()
+	{
+		if(isset($_POST['pid']) && !empty($_POST['pid']) && isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['target']) && !empty($_POST['target']))
+		{
+			$reg = new AlertUsers;
+			if(!Yii::app()->user->isGuest)
+			$reg->user_id = Yii::app()->user->id;
+			$reg->email = $_POST['email'];
+			$reg->target = $_POST['target'];
+			$reg->mobile = $_POST['mobile'];
+			$reg->product_id = $_POST['pid'];
+			$reg->save();
+			$res=array('status'=>'success');
+			echo CJSON::encode($res);
+		}
+		Yii::app()->end();
+	}
+	/**
+	 * This is the action to handle external exceptions.
+	 */
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			if(Yii::app()->request->isAjaxRequest)
+				echo $error['message'];
+			else
+				$this->render('error', $error);
+		}
+	}
+
+	/**
+	 * Displays the contact page
+	 */
+	public function actionContact()
+	{
+		$model=new ContactForm;
+		if(isset($_POST['ContactForm']))
+		{
+			$model->attributes=$_POST['ContactForm'];
+			if($model->validate())
+			{
+				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$headers="From: $name <{$model->email}>\r\n".
+					"Reply-To: {$model->email}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-Type: text/plain; charset=UTF-8";
+
+				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				$this->refresh();
+			}
+		}
+		$this->render('contact',array('model'=>$model));
+	}
+
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+                        $validate=$model->validate();
+                        $login=$model->login();
+			// validate user input and redirect to the previous page if valid
+                        if($validate && $login)
+                        {
+                            if(Yii::app()->user->role=='SuperAdmin' || Yii::app()->user->role=='Admin')
+                            {
+                               echo CJSON::encode(array('status'=>'success', 'redirect'=>  $this->createAbsoluteUrl('/admin')));
+                               Yii::app()->end();
+                            }
+                            else
+                            {
+                                echo CJSON::encode(array('status'=>'success', 'redirect'=>Yii::app()->user->returnUrl));
+                                Yii::app()->end();
+                            }
+                        }
+                        else
+                        {
+                            $error = CActiveForm::validate($model);
+                            if($error!='[]')
+                                echo $error;
+                            Yii::app()->end();
+                        }
+		}
+		// display the login form
+                if(isset($_GET['ajax']))
+		$this->renderPartial('login',array('model'=>$model));
+                else
+		$this->render('directlogin',array('model'=>$model));
+	}
+
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
+	/* searching hints auto complete popup */
+    public function actionHints()
+	{
+		if(isset($_GET['term']))
+		{
+			$temp=array();
+			$match = addcslashes($_GET['term'], '%_');
+			$q = new CDbCriteria( array(
+				'condition' => "name LIKE :match",      // DON'T do it this way!
+				'params'    => array(':match' => '%'.$match.'%')
+			));
+			$cat=  Categories::model()->findAll($q);
+			$sub_cat= SubCategories::model()->findAll($q);
+			$com= Brands::model()->findAll($q);
+			$prodtype= ProductType::model()->findAll($q);
+			$prod= Products::model()->findAll($q);
+			if(isset($cat))
+			foreach($cat as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($sub_cat))
+			foreach($sub_cat as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($com))
+			foreach($com as $c)
+				array_push($temp, array('id'=>$c->id, 'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($prod))
+			foreach($prod as $c)
+				array_push($temp, array('id'=>$c->id,'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			if(isset($prodtype))
+			foreach($prodtype as $c)
+				array_push($temp, array('id'=>$c->id,'label'=>strtolower($c->name), 'value'=>strtolower($c->name)));
+			echo CJSON::encode($temp);
+		}
+		Yii::app()->end();
+	}
+}

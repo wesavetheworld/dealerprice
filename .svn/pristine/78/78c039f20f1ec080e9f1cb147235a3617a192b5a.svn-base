@@ -1,0 +1,50 @@
+<?php
+/**
+ * YiiComplete class file.
+ *
+ * @author Nikola Balog <offinger@gmail.com>
+ * @license Gnu
+ */
+
+/**
+ * 
+ *
+ * @author Nikola Balog <offinger@gmail.com>
+ * @version 0.1
+ */
+class YiiComplete extends CWidget
+{
+
+    public $jsonUrl;
+
+    public function run()
+    {     
+        $html = '';
+        $html .= '
+                    <script>
+                        $(function() {
+                            $.ui.autocomplete.prototype._renderItem = function( ul, item) {
+                                var re = new RegExp(this.term+"+", "i");
+                                var t = item.label.replace(re,"<span>" + this.term + "</span>");
+                                return $( "<li></li>" )
+                                    .data( "item.autocomplete", item )
+                                    .append( "<a>" + t + "</a>" )
+                                    .appendTo( ul );
+                            };
+                            $( "#searchInput" ).autocomplete({
+                            source: "'.$this->jsonUrl.'",
+                            minLength: 3,
+                            select: function( event, ui ) {
+                            $("#searchInput").val(ui.item.value);
+                            //$("#searchForm").submit();
+                            },
+                            });
+                        });
+                    </script>
+                        <input id="searchInput" name="q" type="search"  tabindex="1" placeholder="im looking for..." required="required" class="alignLeft"/>
+                ';
+
+        
+        echo $html;
+    }
+}
