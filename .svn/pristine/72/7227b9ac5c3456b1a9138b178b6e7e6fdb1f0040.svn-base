@@ -140,7 +140,7 @@
 												if(!$firstime){ ?>
                                             <a href="#" data-image="<?=$img->normal?>" data-zoom-image="<?=!empty($img->zoom) ?  $img->zoom : $img->normal?>">
 
-                                                <img class="owl-lazy" data-src="<?=str_replace("400x400","100x100",$img->normal)?>" src="<?=str_replace("400x400","100x100",$img->normal)?>" alt="">
+                                                <img class="owl-lazy" data-src="<?=str_replace("400x400","100x100",$img->normal)?>" alt="">
 
                                             </a>
 												<?php } $firstime = false; } ?>
@@ -497,7 +497,7 @@
 									$q->condition = "products.id <>".$product->id;	
 										
 									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
+									//$q->addCondition('products.id >= RAND() * (SELECT MAX(products.id) FROM products)');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails');
@@ -553,7 +553,7 @@
 											<!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
 
 											<div class="description">
-												<?=CHtml::link(CString::truncate($tprod->name, 50, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'productTitle'))?>
+												<?=CHtml::link(CString::truncate($tprod->name, 60, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'productTitle'))?>
 												
 												<!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
 
@@ -613,7 +613,7 @@
 									else
 									$q->condition = "products.id <>".$product->id;	
 									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
+									//$q->addCondition('products.id >= RAND() * (SELECT MAX(products.id) FROM products)');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails');
@@ -646,7 +646,7 @@
 
 											<div class="wrapper">
 
-												<?=CHtml::link(CString::truncate($tprod->name, 50, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'product_title'))?>
+												<?=CHtml::link(CString::truncate($tprod->name, 60, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'product_title'))?>
 
 												<div class="clearfix product_info">
 
@@ -687,7 +687,6 @@
 									$q->limit=4;
 									$q->addInCondition('products.id', $temp, 'AND');
 									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails');
@@ -711,7 +710,7 @@
 										</a>
 
 										<div class="wrapper">
-											<?=CHtml::link(CString::truncate($prod->name, 50, '...', false), array('site/products', 'url'=>$prod->url), array('class'=>'product_title'))?>
+											<?=CHtml::link(CString::truncate($prod->name, 60, '...', false), array('site/products', 'url'=>$prod->url), array('class'=>'product_title'))?>
 
 											<div class="clearfix product_info">
 

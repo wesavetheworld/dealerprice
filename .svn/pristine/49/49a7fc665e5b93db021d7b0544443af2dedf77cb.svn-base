@@ -55,12 +55,10 @@ class SiteController extends Controller
 	
 		$q = new CDbCriteria;
 		$q->group='products.id';
-
+		$q->addCondition('productDetails.product_id is not null');
+		
 		$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 		$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-		
-		$q->addCondition('productDetails.product_id is not null');
-		$q->addCondition('products.status = 0');
 
 		 if(isset($limit))
 		 {
@@ -120,12 +118,11 @@ class SiteController extends Controller
 		$q = new CDbCriteria;
 
 		$q->group='products.id';
+		$q->addCondition('productDetails.product_id is not null');
 		
 		$q->addSearchCondition('typessubCategory.url', $url, true, 'AND', 'LIKE');
 		$q->addSearchCondition('brandssubCategory.url', $url, true, 'OR', 'LIKE');
 
-		$q->addCondition('productDetails.product_id is not null');
-		$q->addCondition('products.status = 0');
 		 
 		 if(isset($limit))
 		 {
@@ -186,11 +183,9 @@ class SiteController extends Controller
 		$q = new CDbCriteria;
 		
 		$q->group='products.id';
+		$q->addCondition('productDetails.product_id is not null');
 		
 		$q->addSearchCondition('types.url', $url, true, 'AND', 'LIKE');
-		
-		$q->addCondition('productDetails.product_id is not null');
-		$q->addCondition('products.status = 0');
 
 		 if(isset($limit))
 		 {
@@ -251,11 +246,9 @@ class SiteController extends Controller
 		$q = new CDbCriteria;
 		
 		$q->group='products.id';
+		$q->addCondition('productDetails.product_id is not null');
 		
 		$q->addSearchCondition('brands.url', $url, true, 'AND', 'LIKE');
-		
-		$q->addCondition('productDetails.product_id is not null');
-		$q->addCondition('products.status = 0');
 
 		 if(isset($limit))
 		 {
@@ -414,11 +407,7 @@ class SiteController extends Controller
 			$match = $q;
 			
 			$q = new CDbCriteria();
-			
-			if($cat !='all'){
-				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
-				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');
-			}
+			$q->addCondition('productDetails.product_id is not null');
 			
 			$q->addSearchCondition('tcategory.name', $match, true, 'AND', 'LIKE');
 			$q->addSearchCondition('bcategory.name', $match, true, 'OR', 'LIKE');
@@ -427,16 +416,15 @@ class SiteController extends Controller
 			$q->addSearchCondition('products.name', $match, true, 'OR', 'LIKE');
 			$q->addSearchCondition('types.name', $match, true, 'OR', 'LIKE');
 			$q->addSearchCondition('brands.name', $match, true, 'OR', 'LIKE');
-			
+			if($cat !='all'){
+				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
+				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');
+			}
 
-			$q->addCondition('productDetails.product_id is not null');
-			$q->addCondition('products.status = 0');
 
+			 $q->limit=12;
 			 if(isset($limit))
-			 {
-				 $q->limit=12;
-				 $q->offset = $limit;
-			 }
+			 $q->offset = $limit;
 			 if(isset($discount))
 			  {
 				$temp=  explode('-', $discount);

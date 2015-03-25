@@ -115,11 +115,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND()*'.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -198,11 +197,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -281,11 +279,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -364,11 +361,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -447,11 +443,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -530,11 +525,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -613,11 +607,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
@@ -696,12 +689,10 @@
 									$q->limit=6;
 									$q->order='RAND()';
 									$q->group = 'products.id';
-									
+									$q->addCondition('productDetails.product_id is not null');
+									//$q->addCondition('products.id >= RAND() * '.$product->id);
 									$q->addSearchCondition('tcategory.url', $url, true, 'AND', 'LIKE');
 									$q->addSearchCondition('bcategory.url', $url, true, 'OR', 'LIKE');
-									
-									$q->addCondition('productDetails.product_id is not null');
-									$q->addCondition('products.status = 0');
 									$q->together = true;
 									$q->alias="products";
 									$q->with = array('types', 'brands', 'productDetails', 'types.typessubCategory.tcategory', 'brands.brandssubCategory.bcategory');
