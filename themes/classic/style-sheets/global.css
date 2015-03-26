@@ -162,7 +162,7 @@ span.navDivider{padding:0 10px; color:#c8c8c8;}
 
 /* Page Style */
 #pageMegaMenu{width:1200px; margin:0 auto; padding:0;}
-#pageContents{width:1200px; min-height:500px; margin:0 auto; padding:0; margin-top:5px; background-color:#FFF; clear:both;}
+#pageContents{width:1200px; min-height:350px; margin:0 auto; padding:0; margin-top:5px; background-color:#FFF; clear:both;}
 .pageMenu{position:absolute; z-index:9999;}
 .mega_menu{top:0 !important;}
 
@@ -210,8 +210,19 @@ span#allCatBtn i.fa-th-large{padding-left:0; margin-top:1px;}
 #products .image_wrap{height:246px;}
 #products a.productTitle{font-weight:bold; font-size:13px;}
 #products .product_item .def_icon_btn::after, #products .product_item .def_icon_btn::before, #products .product_item .icon_btn i[class|="icon"]::after, #products .product_item .icon_btn i[class|="icon"]::before{margin-left:-2px;}
-#featuredProducts .product_item .def_icon_btn::after, #featuredProducts .product_item .def_icon_btn::before, #featuredProducts .product_item .icon_btn i[class|="icon"]::after, #featuredProducts .product_item .icon_btn i[class|="icon"]::before{margin-left:0;}
+#featuredProducts .product_item .def_icon_btn::after, #featuredProducts .product_item .def_icon_btn::before, #featuredProducts .product_item .icon_btn i[class|="icon"]::after, #featuredProducts .product_item .icon_btn i[class|="icon"]::before{margin-left:-2px;}
 #products .keyDescriptions ul li{display:block; list-style-type:circle !important;}
+
+/* Featured Products */
+#featuredProducts .image_wrap{height:190px;}
+#featuredProducts .image_wrap img{max-width:100%; max-height:100%;}
+
+/* Related Items */
+#relatedItems .product_item{height:310px !important;}
+#relatedItems .description{text-align:left;}
+#relatedItems .image_wrap{height:190px;}
+#relatedItems .image_wrap img{max-width:100%; max-height:100%;}
+
 
 /* Item Page */
 #updatedOn{font-size:13px;}
@@ -378,5 +389,12 @@ form.accountForms input.accSubmits:hover{background-color:#ff5757;}
 form.accountForms input.readOnlyInput{border:0; color:#666;}
 
 #dealsAndCoupons{display:none;}
+
+
+/* Subscriptions */
+form.subscriptionsForm{width:250px;}
+form.subscriptionsForm span{width:230px !important; line-height:12px !important;}
+form.subscriptionsForm input#email{width:20px !important; height:0px !important; margin-bottom:0 !important; padding:0 !important;}
+form.subscriptionsForm input#submitProfile{margin-top:10px; width:50px !important; float:right;}
 
 

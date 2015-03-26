@@ -329,12 +329,15 @@ class SiteController extends Controller
 	}
 	public function updateData($product){
 
-		$cmd = 'java -jar '.Yii::app()->params['javaFilePath'].' '.$product->id;
-		if (substr(php_uname(), 0, 7) == "Windows"){
-			 pclose(popen('start /B '.$cmd, "r")); 
-		}
-		else {
-			 exec($cmd." > /dev/null &", $PID);
+		if(isset($product) && !empty($product))
+		{
+			$cmd = 'java -jar '.Yii::app()->params['javaFilePath'].' '.$product->id;
+			if (substr(php_uname(), 0, 7) == "Windows"){
+				 pclose(popen('start /B '.$cmd, "r")); 
+			}
+			else {
+				 exec($cmd." > /dev/null &", $PID);
+			}
 		}
 		return true;
 	}
@@ -414,7 +417,7 @@ class SiteController extends Controller
 			$match = $q;
 			
 			$q = new CDbCriteria();
-			
+			$q->group='products.id';
 			if($cat !='all'){
 				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
 				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');

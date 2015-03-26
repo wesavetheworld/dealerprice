@@ -9,7 +9,7 @@
                     <div id="breadcrumb">
 
 						<div id="breadcrumbItm">
-                            <span id="bcPnt"><?=CHtml::link("Home", array('/site/index')); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm lastItm"><?=CHtml::link('Alerts', array('/customer/default/alerts')); ?></span>
+                            <span id="bcPnt"><?=CHtml::link("Home", array('/site/index')); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm lastItm"><?=CHtml::link('Subscription', array('/customer/default/subscriptions')); ?></span>
                         </div>
 						
                     </div>
@@ -42,13 +42,13 @@
 				<div id="contentPanel">
                     <div id="panelContents">
                         <div id="errorSum"></div>
-                    	<form id="personalDetails" class="accountForms" method="post" action="<?=$this->createAbsoluteUrl('/customer/default/subscriptions')?>">
-                        <label><span>Subscribe</span>
+                    	<form id="personalDetails" class="accountForms subscriptionsForm" method="post" action="<?=$this->createAbsoluteUrl('/customer/default/subscriptions')?>">
+                        <label><span>Receive Best Deals, Offers &amp; Coupons</span>
                             <?php $check = NewsLetterUsers::model()->findByAttributes(array('email'=>Yii::app()->user->email)); ?>
                             <input type="hidden" name="forSupport" />
                             <input type="checkbox" id="email" name="subscribe" required <?= isset($check) ? 'checked': ''?> /></label>
                         <div style="clear: both"></div>
-                            <?php echo CHtml::ajaxSubmitButton('Subscribe',CHtml::normalizeUrl(array('/customer/default/subscriptions')),
+                            <?php echo CHtml::ajaxSubmitButton('Save',CHtml::normalizeUrl(array('/customer/default/subscriptions')),
              array(
                  'dataType'=>'json',
                  'type'=>'post',

@@ -48,7 +48,7 @@
                     </ul>
                 </div>
 				<!-- End of the Featured Stores -->
-                <section class="section_offset animated transparent" data-animation="fadeInDown"> 
+                <section class="section_offset"> 
                     <div id="polularCategories" class="alignCenter cContent">
                         <h2>popular categories</h2>
                         <div class="pplrCat">
@@ -135,7 +135,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="">
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -218,7 +218,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="">
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -301,7 +301,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -384,7 +384,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -467,7 +467,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -550,7 +550,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80"
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -633,7 +633,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -717,7 +717,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="80">
+												<img src="<?=isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 

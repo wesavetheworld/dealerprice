@@ -6,7 +6,7 @@
                         <!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
                         <div class="image_wrap">
 
-							<?=CHtml::link(CHtml::image($images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png', "", array('width'=>'100')), array('site/products', 'url'=>$prod->url), array('class'=>'productTitle'))?>
+							<?=CHtml::link(CHtml::image(isset($images) && !empty($images) && $images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png', ""), array('site/products', 'url'=>$prod->url), array('class'=>'productTitle'))?>
                             
                                 <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
                                 <div class="actions_wrap">

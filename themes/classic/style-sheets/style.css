@@ -2394,6 +2394,26 @@
 			.alertCommands .fa{margin-right:20px; font-size:20px; cursor:pointer; transition:color 0.5s ease;}
 			.alertCommands .fa:hover{color:#ff5757;}
             
+            /* Buy Buttons */
+            a.buy-button:link, a.buy-button:visited{color:#FFF; font-weight:700;}
+            #enabledFilters{padding-top:12px; margin-left:255px;}
+            #enabledFilters span i.fa{margin-top:-2px;}
+            #enabledFilters span{margin-right:20px; color:#666; font-size:13px; cursor:pointer; transition:color 0.5s ease;}
+            #enabledFilters span:hover{color:#ff5757;}
+            
+            /* forgot changed */
+            #contentsLogin{padding:20px;}
+            #pageContentsLogin{}
+            #pageContentsLogin h3{font-size:16px;}
+            #contentsLogin #forgotForm{height:50px;}
+            #contentsLogin form#forgetForm{width:440px; margin-top:20px;}
+            #contentsLogin .forgetPass span{float:left; line-height:30px;}
+            #contentsLogin input#loginEmailId{width:275px; height:32px; padding:5px; float:left; margin-left:10px; border:1px solid #CCC;}
+            #contentsLogin input#loginSubmit{padding:6px 0px; width:100px; text-align:center; display:block; float:right; background:#14bfcc; color:#FFF; border-radius:3px; border:0;}
+            #contentsLogin .forgetPass #forgetStatus{}
+            
+            /* Product Ajax */
+            .product_item .image_wrap img{max-width:100%; max-height:100%;}
             
 			
 			

@@ -1,7 +1,8 @@
+    <div id="pageContents">
         <div id="contentsLogin">
         		<div id="innerContentsLogin" style="min-height:200px;">
                     <div id="pageContentsLogin">
-            			<h1 id="pageH1">Forget Password?</h1>
+            			<h3>Forget Password?</h3>
                         <div class="forgetPass" style="margin: 0 auto; float: none;">
                         		<div id="forgotForm">
                                             <?php $form=$this->beginWidget('CActiveForm', array(
@@ -24,6 +25,7 @@
                      </div>
                   </div>      
 		</div>
+    </div>    
 <script type="text/javascript">
 function send()
  {

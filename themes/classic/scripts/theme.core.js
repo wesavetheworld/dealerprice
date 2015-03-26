@@ -35,12 +35,12 @@ var Core = (function(Core){
     		});*/
 
 			this.fancyboxValidationFix();
-			this.generateBackToTopButton();
+			//this.generateBackToTopButton();
 			this.attachButton();
 			this.events.closeButton();
 			this.events.acceptCookies();
 			//this.events.productRating();
-			this.events.backToTop(500);
+			//this.events.backToTop(500);
 			this.events.socialFeeds();
 			this.events.qty();
 			this.events.resetFilter();

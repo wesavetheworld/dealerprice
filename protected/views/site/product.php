@@ -120,7 +120,12 @@
 
                                     <div class="image_preview_container">
 										<?php $images = json_decode($product->images); ?>
-                                        <img id="img_zoom" data-zoom-image="<?=!empty($images[0]->zoom) ?  $images[0]->zoom : $images[0]->normal?>" src="<?=$images[0]->normal?>" alt="">
+                                        <img id="img_zoom" data-zoom-image="<?php 
+										if(isset($images) && !empty($images) && !empty($images[0]->zoom))
+										echo $images[0]->zoom;
+										else if(isset($images) && !empty($images) && !empty($images[0]->normal))
+										echo $images[0]->normal;
+										?>" src="<?=(isset($images) && !empty($images) && !empty($images[0]->normal)) ? $images[0]->normal:''?>" alt="">
 
                                         <button class="button_grey_2 icon_btn middle_btn open_qv"><i class="icon-resize-full-6"></i></button>
 
@@ -137,7 +142,7 @@
 											$firstime = true;
 											if(!empty($images))
 												foreach($images as $img){
-												if(!$firstime){ ?>
+												if(!$firstime && isset($img) && !empty($img)){ ?>
                                             <a href="#" data-image="<?=$img->normal?>" data-zoom-image="<?=!empty($img->zoom) ?  $img->zoom : $img->normal?>">
 
                                                 <img class="owl-lazy" data-src="<?=str_replace("400x400","100x100",$img->normal)?>" src="<?=str_replace("400x400","100x100",$img->normal)?>" alt="">
@@ -273,10 +278,14 @@
 
                                         <ul class="tabs_nav clearfix">
                                             <li><a href="#tab-1"><i class="fa fa-inr"></i> Prices</a></li>
+											<?php if(isset($product->overview) && !empty($product->overview)){ ?>
                                             <li><a href="#tab-2"><i class="fa fa-file-o"></i> Overview</a></li>
+											<?php } ?>
                                             <li><a href="#tab-3"><i class="fa fa-list"></i> Specifications</a></li>
                                             <li><a href="#tab-4"><i class="fa fa-star"></i> Reviews (<?=count($product->productReviews)?>)</a></li>
+											<?php if(isset($product->video_url) && !empty($product->video_url)){ ?>
                                             <li><a href="#tab-5"><i class="fa fa-video-camera"></i> Videos</a></li>
+											<?php } ?>
 
                                         </ul>
                                         
@@ -521,7 +530,7 @@
 
 											<div class="image_wrap">
 
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  width="126" height="250">
+												<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
 
 												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
 
@@ -571,7 +580,7 @@
 												
 												<div class="clearfix product_info">
 													<?php if($tprod->productPrice->discount > 0 && $tprod->productPrice->mrp > 0){ ?>
-													<p class="product_price alignright"><span class="discount"><span class="discountRs">Rs. <?=number_format($tprod->productPrice->mrp-$tprod->productPrice->price)?></span><span class="discountRate">(<?=$tprod->productPrice->discount?>% off)</span></span></p>
+													<p class="product_price"><span class="discount"><span class="discountRs">Rs. <?=number_format($tprod->productPrice->mrp)?></span><span class="discountRate">(<?=$tprod->productPrice->discount?>% off)</span></span></p>
 													<?php } ?>
 													<p class="product_price alignleft"><b>Rs. <?=number_format($tprod->productPrice->price)?></b></p>
 												</div>
@@ -640,7 +649,7 @@
 											
 											<a href="<?=$this->createUrl('site/products', array('url'=>$tprod->url))?>" class="product_thumb">
 												
-												<img src="<?=$images[0]->normal ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" width="83" height="83">
+												<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" width="83" height="83">
 
 											</a>
 
@@ -683,8 +692,10 @@
 										$temp = $myarr;
 									}
 									if(count($temp)> 0 ){
+									
 									$q = new CDbCriteria;
 									$q->limit=4;
+									$q->group='products.id';
 									$q->addInCondition('products.id', $temp, 'AND');
 									$q->addCondition('productDetails.product_id is not null');
 									$q->addCondition('products.status = 0');
@@ -706,7 +717,7 @@
 
 										<a href="<?=$this->createUrl('site/products', array('url'=>$prod->url))?>" class="product_thumb">
 											
-											<img src="<?=$images[0]->normal ? str_replace("400x400","100x100", $images[0]->normal) : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" >
+											<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? str_replace("400x400","100x100", $images[0]->normal) : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" >
 
 										</a>
 
