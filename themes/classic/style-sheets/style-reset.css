@@ -87,3 +87,11 @@ form .stars span {
 .reviewForm  form#product-reviews-form .stars{float:right;}
 .reviewForm  form#product-reviews-form .row{height:40px;}
 .reviewForm  form#product-reviews-form .reviewMsg{height:155px;}
+#showloading{
+	background: url("../images/ui-anim_basic_16x16.gif") no-repeat scroll 10px center rgba(0, 0, 0, 0);
+    display: none;
+    font-size: 10px;
+    margin: 0 auto;
+    text-align: center;
+    width: 160px;
+}

@@ -26,41 +26,6 @@ class SiteController extends Controller
 		);
 	}
 
-	public function actionImport()
-	{
-		set_time_limit(0);
-		$file = fopen("cameras.csv","r");
-		$count = 0;
-		while (($fields = fgetcsv($file, 0, ",")) !== FALSE) {
-			$count++;
-			if ($count == 1) { continue; }
-			if(!empty($fields[1])){
-				$product = new Products;
-				$product->name = $fields[1];
-				$product->url = $this->format_uri($fields[1]);
-				if($product->save(false)){
-					$prodd = new ProductDetails;
-					$prodd->product_id = $product->id;
-					$prodd->store_id = 1;
-					$prodd->affiliate_url = $fields[6];
-					$prodd->save(false);
-				}
-			}
-			//echo $this->format_uri($fields[1]).'       '.$fields[6].'      '.$fields[7].'       '.$fields[8].'<br/>';
-		}
-		Yii::app()->end();
-	}
-	function format_uri( $string, $separator = '-' )
-	{
-		$accents_regex = '~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i';
-		$special_cases = array( '&' => 'and');
-		$string = mb_strtolower( trim( $string ), 'UTF-8' );
-		$string = str_replace( array_keys($special_cases), array_values( $special_cases), $string );
-		$string = preg_replace( $accents_regex, '$1', htmlentities( $string, ENT_QUOTES, 'UTF-8' ) );
-		$string = preg_replace("/[^a-z0-9]/u", "$separator", $string);
-		$string = preg_replace("/[$separator]+/u", "$separator", $string);
-		return $string;
-	}
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -453,7 +418,10 @@ class SiteController extends Controller
 			
 			$q = new CDbCriteria();
 			$q->group='products.id';
-			
+			if($cat !='all'){
+				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
+				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');
+			}
 			
 			$q->addSearchCondition('tcategory.name', $match, true, 'AND', 'LIKE');
 			$q->addSearchCondition('bcategory.name', $match, true, 'OR', 'LIKE');
@@ -466,10 +434,6 @@ class SiteController extends Controller
 
 			$q->addCondition('productDetails.product_id is not null');
 			$q->addCondition('products.status = 0');
-			if($cat !='all'){
-				$q->addSearchCondition('tcategory.url', $cat, true, 'AND', 'LIKE');
-				$q->addSearchCondition('bcategory.url', $cat, true, 'OR', 'LIKE');
-			}
 
 			 if(isset($limit))
 			 {

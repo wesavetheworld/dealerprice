@@ -155,9 +155,7 @@ foreach($products as $p){
                 </div>
                 <div id="products">
 				</div>
-				
                 <div style="clear:both;"></div>
-				<div id="showloading"><h1>Loading...</h1></div>
                 <!-- End of Featured Products -->
 			<?php } ?>
 			</div>
@@ -167,14 +165,11 @@ $(document).ready(function(){
 	var furl=window.location.href;
     $.get(furl,{limit: 0, ajax:true}, function(d){ $('#products').append(d); });
     var limit=12;
-	var running = false;
     $(window).scroll(function() {
-        if(($(window).scrollTop() + $(window).height()) >= ($(document).height()-230) && !running) {
-			running = true;
-			$('#showloading').show();
-            var url = window.location.href;
-            $.get(url, {limit: limit, ajax:true}, function(d){ $('#products').append(d); $('#showloading').hide(); running = false; });
-			limit=limit+12;
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+            var url = updateURLParameter(window.location.href, 'limit', limit);
+            $.get(url, {ajax:true}, function(d){ $('#products').append(d); });
+            limit=limit+12;
         }
     });
 	//brand all button
@@ -188,7 +183,7 @@ $(document).ready(function(){
             });
             var u = updateURLParameter(window.location.href, 'brand', 'all');
 			limit=12;
-			updateURL(u, 0);
+			updateURL(u);
             $(this).parent().addClass('activeF');
         }
 		else
@@ -214,17 +209,16 @@ $(document).ready(function(){
         if(com=='')
         {
             var u = removeURLParameter(window.location.href, 'brand');
-			updateURL(u, 0);
+			updateURL(u);
         }
         else
         {
             var u = updateURLParameter(window.location.href, 'brand', com);
-			updateURL(u, 0);
+			updateURL(u);
         }
     });
 	//remove brands from filter
 	$(document).on('click', '.filterSpanBrand',  function(){
-		limit=12;
         var t=$.trim($(this).text());
         var u = '';
         $('input[value="'+$(this).attr('data-brandid')+'"]').removeAttr('checked').parent().removeClass('activeF');
@@ -235,7 +229,8 @@ $(document).ready(function(){
         else
           u = updateURLParameter(window.location.href, 'brand', updatedString);
         $(this).remove();
-		updateURL(u, 0);
+        updateURL(u);
+        limit=12;
     });
 	// types all button
 	$('.typeFlrAll').click(function(){
@@ -248,7 +243,7 @@ $(document).ready(function(){
             });
             var u = updateURLParameter(window.location.href, 'types', 'all');
             limit=12;
-			updateURL(u, 0);
+            updateURL(u);
             $(this).parent().addClass('activeF');
         }
 		else
@@ -275,17 +270,16 @@ $(document).ready(function(){
         if(com=='')
         {
             var u = removeURLParameter(window.location.href, 'types');
-			updateURL(u, 0);
+            updateURL(u);
         }
         else
         {
             var u = updateURLParameter(window.location.href, 'types', com);
-			updateURL(u, 0);
+            updateURL(u);
         }
     });
 	//remove types from filter
     $(document).on('click', '.filterSpanType',  function(){
-		limit=12;
         var t=$.trim($(this).text());
         var u = '';
         $('input[value="'+$(this).attr('data-typeid')+'"]').removeAttr('checked').parent().removeClass('activeF');
@@ -296,10 +290,12 @@ $(document).ready(function(){
         else
           u = updateURLParameter(window.location.href, 'types', updatedString);
         $(this).remove();
-		updateURL(u, 0);
+        updateURL(u);
+        limit=12;
     });
 	// add discount filters
     $('.discount-apply').click(function(){
+      limit=12;
       $.each($('.discount-apply'), function(i, v){
          $(v).parent().removeClass('activeF');
       });
@@ -313,17 +309,15 @@ $(document).ready(function(){
 			$('.filterSpanDiscount').html('<i class="fa fa-times-circle"></i>&nbsp;Discount: '+$(this).val());
 		
         var u = updateURLParameter(window.location.href, 'discount', $(this).val());
-		limit=12;
-		updateURL(u, 0);
+        updateURL(u, $(this).parent().text(), 'discount');
       }
     });
 	// remove discount filters
 	$(document).on('click', '.filterSpanDiscount',  function(){
-			$.each($('.discout-list li'), function(i, v){ $(v).removeClass('activeF'); $(v).find('input').removeAttr('checked'); });
             var u = removeURLParameter(window.location.href, 'discount');
             $(this).remove();
-			limit=12;
-			updateURL(u, 0);
+            updateURL(u);
+            limit=12;
     });
 	
 	$('.sItm, .sPItm').click(function(){
@@ -332,8 +326,8 @@ $(document).ready(function(){
         $(this).addClass('activeS');
         var sort=$.trim($(this).text());
         var url = updateURLParameter(window.location.href, 'sort', sort);
-		limit=12;
-        updateURL(url, 0);
+        updateURL(url);
+        limit=12;
     });
 	$(document).on('click', '.new_item_wishlist', function(){
 
@@ -394,10 +388,10 @@ function removeURLParameter(url, parameter) {
         return url;
     }
 }
-function updateURL(url, limit)
+function updateURL(url)
 {
         var state = {"canBeAnything": true};
         history.pushState(state, "Product Page", url);
-        $.get(url, {limit: limit, ajax:true}, function(d){ $('#products').html(d); });
+        $.get(url, {ajax:true}, function(d){ $('#products').html(d); });
 }
 </script>

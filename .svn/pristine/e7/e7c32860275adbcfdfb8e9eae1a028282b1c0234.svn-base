@@ -1,0 +1,795 @@
+            <!-- End of Header -->
+            <div id="pageHeader">
+                <div id="innerPageHeader">
+                    <div id="mainMenuBtn">
+                        <span id="allCatBtn">
+                            <i class="fa fa-th-large"></i><a href="#">All Categories</a>
+                        </span>
+                    </div>
+                    <!-- End of Main Menu Button -->
+                    <div id="breadcrumb" style=' width: 620px;'>
+						<?php if(isset($product->brands) && isset($product->brands->brandssubCategory->category)){ ?>
+                        
+						<div id="breadcrumbItm">
+                            <span id="bcPnt"><?=CHtml::link($product->brands->brandssubCategory->category->name, array('site/category', 'url'=>$product->brands->brandssubCategory->category->url)); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm"><?=CHtml::link($product->brands->brandssubCategory->name, array('site/subcategory', 'url'=>$product->brands->brandssubCategory->url)); ?></span><span class="nextItm">&gt;</span><span class="bcItm"><?=CHtml::link($product->brands->name, array('site/brands', 'url'=>$product->brands->url)); ?></span><span class="nextItm">&gt;</span><span class="bcItm lastItm"><?=$product->name?></span><span id="storeCount"> (<?=count($product->productDetails)?> Stores)</span>
+                        </div>
+						<?php } else  if(isset($product->types) && isset($product->types->typessubCategory->category)) { ?>
+						<div id="breadcrumbItm">
+						<span id="bcPnt"><?=CHtml::link($product->types->typessubCategory->category->name, array('site/category', 'url'=>$product->types->typessubCategory->category->url)); ?></span> <span class="nextItm">&gt;</span> <span class="bcItm"><?=CHtml::link($product->types->typessubCategory->name, array('site/subcategory', 'url'=>$product->types->typessubCategory->url)); ?></span><span class="nextItm">&gt;</span><span class="bcItm"><?=CHtml::link($product->types->name, array('site/types', 'url'=>$product->types->url)); ?></span><span class="nextItm">&gt;</span><span class="bcItm lastItm"><?=$product->name?></span><span id="storeCount"> (<?=count($product->productDetails)?> Stores)</span>
+                        </div>
+						<?php } ?>
+                    </div>
+                    <!-- End of Breadcrumb -->
+					<div id="updatedOn">
+					<div id="updateDate">
+					<span id="sortPnt">Last Updated:</span>
+					<span class="sItm activeS"><?=$product->last_updated > 0 ? timeAgo($product->last_updated):''?></span>
+					<?php
+						function timeAgo($time_ago){
+						$cur_time 	= time();
+						$time_elapsed 	= $cur_time - $time_ago;
+						$seconds 	= $time_elapsed ;
+						$minutes 	= round($time_elapsed / 60 );
+						$hours 		= round($time_elapsed / 3600);
+						$days 		= round($time_elapsed / 86400 );
+						$weeks 		= round($time_elapsed / 604800);
+						$months 	= round($time_elapsed / 2600640 );
+						$years 		= round($time_elapsed / 31207680 );
+						// Seconds
+						if($seconds <= 60){
+							echo "$seconds seconds ago";
+						}
+						//Minutes
+						else if($minutes <=60){
+							if($minutes==1){
+								echo "one minute ago";
+							}
+							else{
+								echo "$minutes minutes ago";
+							}
+						}
+						//Hours
+						else if($hours <=24){
+							if($hours==1){
+								echo "an hour ago";
+							}else{
+								echo "$hours hours ago";
+							}
+						}
+						//Days
+						else if($days <= 7){
+							if($days==1){
+								echo "yesterday";
+							}else{
+								echo "$days days ago";
+							}
+						}
+						//Weeks
+						else if($weeks <= 4.3){
+							if($weeks==1){
+								echo "a week ago";
+							}else{
+								echo "$weeks weeks ago";
+							}
+						}
+						//Months
+						else if($months <=12){
+							if($months==1){
+								echo "a month ago";
+							}else{
+								echo "$months months ago";
+							}
+						}
+						//Years
+						else{
+							if($years==1){
+								echo "one year ago";
+							}else{
+								echo "$years years ago";
+							}
+						}
+						}
+
+						?>
+					</div>
+					</div>
+                    <!-- End of Sorting -->
+                </div>    
+            </div>
+            <div id="pageMegaMenu">
+                <div id="megaMenu" class="pageMenu">
+               		<?php $this->beginContent('//layouts/mega-menu'); $this->endContent(); ?>
+                </div>  
+                <!-- End of Mega Menu -->
+            </div> 
+ 
+ <!-- End of Menu and Slider -->
+			<div id="pageContents">
+                <div id="item">
+					<div id="itmImgNPrice">
+						<!-- - - - - - - - - - - - - - Product images & description - - - - - - - - - - - - - - - - -->
+                        <section class="section_offset">
+
+                            <div class="clearfix">
+
+                                <!-- - - - - - - - - - - - - - Product image column - - - - - - - - - - - - - - - - -->
+
+                                <div class="single_product">
+
+                                    <!-- - - - - - - - - - - - - - Image preview container - - - - - - - - - - - - - - - - -->
+
+                                    <div class="image_preview_container">
+										<?php $images = json_decode($product->images); ?>
+                                        <img id="img_zoom" data-zoom-image="<?php 
+										if(isset($images) && !empty($images) && !empty($images[0]->zoom))
+										echo $images[0]->zoom;
+										else if(isset($images) && !empty($images) && !empty($images[0]->normal))
+										echo $images[0]->normal;
+										?>" src="<?=(isset($images) && !empty($images) && !empty($images[0]->normal)) ? $images[0]->normal:''?>" alt="">
+
+                                        <button class="button_grey_2 icon_btn middle_btn open_qv"><i class="icon-resize-full-6"></i></button>
+
+                                    </div><!--/ .image_preview_container-->
+
+                                    <!-- - - - - - - - - - - - - - End of image preview container - - - - - - - - - - - - - - - - -->
+
+                                    <!-- - - - - - - - - - - - - - Prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+                                    
+                                    <div class="product_preview">
+
+                                        <div class="owl_carousel" id="thumbnails">
+                                            <?php
+											$firstime = true;
+											if(!empty($images))
+												foreach($images as $img){
+												if(!$firstime && isset($img) && !empty($img)){ ?>
+                                            <a href="#" data-image="<?=$img->normal?>" data-zoom-image="<?=!empty($img->zoom) ?  $img->zoom : $img->normal?>">
+
+                                                <img class="owl-lazy" data-src="<?=str_replace("400x400","100x100",$img->normal)?>" src="<?=str_replace("400x400","100x100",$img->normal)?>" alt="">
+
+                                            </a>
+												<?php } $firstime = false; } ?>
+                                        </div><!--/ .owl-carousel-->
+
+                                    </div><!--/ .product_preview-->
+                                    
+                                    <!-- - - - - - - - - - - - - - End of prodcut thumbs carousel - - - - - - - - - - - - - - - - -->
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of product image column - - - - - - - - - - - - - - - - -->
+
+                                <!-- - - - - - - - - - - - - - Product description column - - - - - - - - - - - - - - - - -->
+
+                                <div class="single_product_description">
+
+                                    <h3 class="offset_title itmTitle">
+									<?=CHtml::link($product->name, array('site/products', 'url'=>$product->url))?>
+									</h3>
+
+                                    <div class="description_section v_centered">
+
+                                        <!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+                                    
+                                        <?php $rating = round($product->productPrice->rating); ?>
+										<ul class="rating">
+											<li class="<?=$rating>=1 ? 'active': ''?>"></li>
+											<li class="<?=$rating>=2 ? 'active': ''?>"></li>
+											<li class="<?=$rating>=3 ? 'active': ''?>"></li>
+											<li class="<?=$rating>=4 ? 'active': ''?>"></li>
+											<li class="<?=$rating>=5 ? 'active': ''?>"></li>
+										</ul>
+                                            
+                                        <!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Reviews menu - - - - - - - - - - - - - - - - -->
+
+                                        <ul class="topbar">
+
+                                            <li><a href="#"><?=$product->productPrice->rating_people?> Rating(s)</a></li>
+											<li><?=CHtml::link('Write Review', array('productreviews/create', 'id'=>$product->id))?></li>
+											<li><a href="#" class="show-popup-best-price" data-showpopup="1" data-pid="<?=$product->id?>">Best Price Alert</a></li>
+
+                                        </ul>
+
+                                        <!-- - - - - - - - - - - - - - End of reviews menu - - - - - - - - - - - - - - - - -->
+
+                                    </div>
+									
+                                    <div class="description_section">
+                                        <h4 class="itmKeyFeatures">Key Features</h4>
+                                        <div id="itmKeyFeatures">
+                                            <?=$product->key_features?>
+											<div style="clear:left;"></div>
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+									<span class="bestPriceStore <?=strpos($product->productPrice->affiliate_url, 'amazon') !== false ? 'amazon':''?> <?=strpos($product->productPrice->affiliate_url, 'flipkart') !== false ? 'flipkart':''?> <?=strpos($product->productPrice->affiliate_url, 'snapdeal') !== false ? 'snapdeal':''?> <?=strpos($product->productPrice->affiliate_url, 'infibeam') !== false ? 'infibeam':''?>"></span>
+									<p class="bestItmPrice">Best Price</p>
+                                    <p class="product_price">
+									<?php if($product->productPrice->discount > 0 && $product->productPrice->mrp > 0){ ?>
+									<s class="itmMrp">Rs. <?=number_format($product->productPrice->mrp)?></s>
+									<span id="itmDiscountRate"> (<?=$product->productPrice->discount?>% off)</span>
+									<?php } ?>
+									<b class="theme_color itmPrice">Rs. <?=number_format($product->productPrice->price)?></b></p>
+
+                                    <!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+                                    <div class="buttons_row itmButtons">
+										<?=CHtml::link('BUY NOW', array('/site/affiliateurl'), array('class'=>"button_blue middle_btn buy-button", 'data-redirect'=>$product->productPrice->id, 'target'=>'_blank'))?>
+
+									<?php if(Yii::app()->user->isGuest){ ?>
+									<button id="addToWhislist" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container new_item_wishlist" data-pid="<?=$product->id?>"><span class="tooltip top">Add to Wishlist</span></button>
+									<?php } else { ?>
+									<button id="addToWhislist" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container <?=$product->wishlist > 0 ? 'remove_item_wishlist': 'new_item_wishlist' ?>" data-pid="<?=$product->id?>"><span class="tooltip top"><?=$product->wishlist > 0 ? 'Remove from Wishlist': 'Add to Wishlist' ?></span></button>
+									<?php } ?>
+									
+                                        <button id="addToCompare" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container"><span class="tooltip top">Add to Compare</span></button>
+
+                                    </div>
+
+                                    <!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+									<!-- - - - - - - - - - - - - - Share - - - - - - - - - - - - - - - - -->
+								
+									<div class="v_centered itmShareBtns">
+
+										<span class="title">Share this:</span>
+
+										<div class="addthis_widget_container">
+											<!-- AddThis Button BEGIN -->
+											<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+											<a class="addthis_button_preferred_1"></a>
+											<a class="addthis_button_preferred_2"></a>
+											<a class="addthis_button_preferred_3"></a>
+											<a class="addthis_button_preferred_4"></a>
+											<a class="addthis_button_compact"></a>
+											<a class="addthis_counter addthis_bubble_style"></a>
+											</div>
+											<!-- AddThis Button END -->
+										</div>
+										
+									</div>
+									
+									<!-- - - - - - - - - - - - - - End of share - - - - - - - - - - - - - - - - -->
+
+                                </div>
+
+                                <!-- - - - - - - - - - - - - - End of product description column - - - - - - - - - - - - - - - - -->
+
+                            </div>
+
+                        </section><!--/ .section_offset -->
+
+                        <!-- - - - - - - - - - - - - - End of product images & description - - - - - - - - - - - - - - - - -->
+					</div>
+					<!-- End of Item Image and Price -->
+                    <div id="itmContentTwo">
+                        <div id="itmContentTwoLeft">
+                            <div id="itmDesc">
+                                <!-- - - - - - - - - - - - - - Tabs - - - - - - - - - - - - - - - - -->
+
+                                <div class="section_offset">
+
+                                    <div class="tabs type_2">
+
+                                        <!-- - - - - - - - - - - - - - Navigation of tabs - - - - - - - - - - - - - - - - -->
+
+                                        <ul class="tabs_nav clearfix">
+                                            <li><a href="#tab-1"><i class="fa fa-inr"></i> Prices</a></li>
+											<?php if(isset($product->overview) && !empty($product->overview)){ ?>
+                                            <li><a href="#tab-2"><i class="fa fa-file-o"></i> Overview</a></li>
+											<?php } ?>
+                                            <li><a href="#tab-3"><i class="fa fa-list"></i> Specifications</a></li>
+                                            <li><a href="#tab-4"><i class="fa fa-star"></i> Reviews (<?=count($product->productReviews)?>)</a></li>
+											<?php if(isset($product->video_url) && !empty($product->video_url)){ ?>
+                                            <li><a href="#tab-5"><i class="fa fa-video-camera"></i> Videos</a></li>
+											<?php } ?>
+
+                                        </ul>
+                                        
+                                        <!-- - - - - - - - - - - - - - End navigation of tabs - - - - - - - - - - - - - - - - -->
+
+                                        <!-- - - - - - - - - - - - - - Tabs container - - - - - - - - - - - - - - - - -->
+
+                                        <div class="tab_containers_wrap">
+                                        
+                                            <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                            <div id="tab-1" class="tab_container">
+												
+												<div id="storePrices">
+												<?php if(isset($product->productDetails))
+													foreach($product->productDetails as $p) 
+													if($p->id != $product->productPrice->id) {?>
+												
+													<!-- Start of Store -->
+													<div class="store">
+														<div class="itmStoreLogo">
+															<?php if (strpos($p->affiliate_url, 'amazon') !== false){ ?>
+															<a href="http://www.amazon.in" target="_blank" class="amazonStore">Amazon</a>
+															<?php } else if(strpos($p->affiliate_url, 'flipkart') !== false){?>
+															<a href="http://www.flipkart.com" target="_blank" class="flipkartStore">Flipkart</a>
+															<?php } else if(strpos($p->affiliate_url, 'snapdeal') !== false){?>
+															<a href="http://www.snapdeal.com" target="_blank" class="snapdealStore">Snapdeal</a>
+															<?php } else if(strpos($p->affiliate_url, 'infibeam') !== false){?>
+															<a href="http://www.infibeam.com/" target="_blank" class="infibeamStore">Infibeam</a>
+															<?php } ?>
+														</div>
+														<div class="itmStorePrice">
+															<span>Rs. <?=number_format($p->price)?></span>
+														</div>
+														<div class="itmStoreRating">
+															<!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+															<?php $rating = round($p->rating); ?>
+															<ul class="rating">
+																<li class="<?=$rating>=1 ? 'active': ''?>"></li>
+																<li class="<?=$rating>=2 ? 'active': ''?>"></li>
+																<li class="<?=$rating>=3 ? 'active': ''?>"></li>
+																<li class="<?=$rating>=4 ? 'active': ''?>"></li>
+																<li class="<?=$rating>=5 ? 'active': ''?>"></li>
+															</ul>
+															<!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+														</div>
+														<div class="itmStoreBuyBtn">
+														<?=CHtml::link('BUY AT STORE', array('/site/affiliateurl'), array('class'=>"button_blue middle_btn storeBtn buy-button", 'data-redirect'=>$p->id, 'target'=>'_blank'))?>
+														</div>
+													</div>
+													<!-- End of Stores -->
+													<?php } ?>
+												
+													
+												</div>
+                                                
+                                            </div><!--/ #tab-1-->
+
+                                            <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                            <div id="tab-2" class="tab_container itmOverview">
+                                               <?=$product->overview?>
+                                            </div><!--/ #tab-2-->
+
+                                            <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                            <div id="tab-3" class="tab_container itmSpecifications">
+												<?=$product->specifications?>
+                                            </div><!--/ #tab-3-->
+
+                                            <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                            <div id="tab-4" class="tab_container">
+
+                                                <section class="section_offset">
+
+                                                    <h3>Customer Reviews</h3>
+
+                                                    <ul class="reviews">
+													<?php
+													$j = 0;
+													foreach($product->productReviews as $review){
+														$j++;
+													?>
+                                                        <li>
+
+                                                            <!-- - - - - - - - - - - - - - Review - - - - - - - - - - - - - - - - -->
+                                                            
+                                                            <article class="review">
+
+                                                                <!-- - - - - - - - - - - - - - Rates - - - - - - - - - - - - - - - - -->
+
+                                                                <ul class="review-rates">
+
+                                                                    <!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
+
+                                                                    <li class="v_centered">
+                                                                        
+																	<?php $rating = round($review->rating); ?>
+																	<ul class="rating">
+																		<li class="<?=$rating>=1 ? 'active': ''?>"></li>
+																		<li class="<?=$rating>=2 ? 'active': ''?>"></li>
+																		<li class="<?=$rating>=3 ? 'active': ''?>"></li>
+																		<li class="<?=$rating>=4 ? 'active': ''?>"></li>
+																		<li class="<?=$rating>=5 ? 'active': ''?>"></li>
+																	</ul>
+																									
+
+                                                                    </li>
+
+                                                                    <!-- - - - - - - - - - - - - - End of price - - - - - - - - - - - - - - - - -->
+
+                                                                </ul>
+
+                                                                <!-- - - - - - - - - - - - - - End of rates - - - - - - - - - - - - - - - - -->
+
+                                                                <!-- - - - - - - - - - - - - - Review body - - - - - - - - - - - - - - - - -->
+
+                                                                <div class="review-body">
+
+                                                                    <div class="review-meta">
+                                                                        
+                                                                        <h5 class="bold">
+																		<?php 
+																		if($rating == 5)
+																			echo 'Excelent';
+																		else if($rating == 4)
+																			echo 'Good';
+																		else if($rating == 3)
+																			echo 'Fare';
+																		else if($rating <=2)
+																			echo 'Bad';
+																		?>
+																		</h5>
+                                                                        
+                                                                        Review by <a href="#" class="bold"><?=$review->reviewer_name?></a> on <?=date('d/m/Y', $review->posted)?>
+
+                                                                    </div>
+
+                                                                    <p><?=$review->review?></p>
+
+                                                                </div>
+
+                                                                <!-- - - - - - - - - - - - - - End of review body - - - - - - - - - - - - - - - - -->
+
+                                                            </article>
+
+                                                            <!-- - - - - - - - - - - - - - End of review - - - - - - - - - - - - - - - - -->
+
+                                                        </li>
+
+													<?php if($j==20) break; } ?>
+                                                    </ul>
+													<?php if(count($product->productReviews) > 20) { ?>
+                                                    <a href="#" class="button_grey middle_btn show-all-reviews" data-pid="<?=$product->id?>">Show All</a>
+													<?php } ?>
+
+                                                </section><!--/ .section_offset -->
+
+                                            </div><!--/ #tab-4-->
+
+                                            <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                            <!-- - - - - - - - - - - - - - Tab - - - - - - - - - - - - - - - - -->
+
+                                            <div id="tab-5" class="tab_container">
+											
+												<div id="itmVideos">
+													<!-- - - - - - - - - - - - - - Youtube video - - - - - - - - - - - - - - - - -->
+
+													<div class="video_wrap">
+
+													<?=$product->video_url?>
+
+													</div><!--/ .video_wrap -->
+
+													<!-- - - - - - - - - - - - - - End of youtube video - - - - - - - - - - - - - - - - -->
+												</div>
+												
+                                            </div><!--/ #tab-5-->
+
+                                            <!-- - - - - - - - - - - - - - End tab - - - - - - - - - - - - - - - - -->
+
+                                        </div><!--/ .tab_containers_wrap -->
+
+                                        <!-- - - - - - - - - - - - - - End of tabs containers - - - - - - - - - - - - - - - - -->
+
+                                    </div><!--/ .tabs-->
+
+                                </div><!--/ .section_offset -->
+
+                                <!-- - - - - - - - - - - - - - End of tabs - - - - - - - - - - - - - - - - -->
+                            </div>
+                            <!-- End of Item Description -->
+                            
+                            <div id="relatedItems">
+                                <!-- - - - - - - - - - - - - - Related products - - - - - - - - - - - - - - - - -->
+
+							<section class="section_offset">
+								<?php
+									$q = new CDbCriteria;
+									$q->limit=8;
+									$q->order='RAND()';
+									$q->group = 'products.id';
+									if(isset($product->brands) && isset($product->types))
+									$q->condition = "products.id <>".$product->id.' AND (brands.id ='.$product->brands->id. ' OR types.id = '.$product->types->id.')';
+									else if(isset($product->brands))
+									$q->condition = "products.id <>".$product->id.' AND brands.id ='.$product->brands->id;
+									else if(isset($product->types))
+									$q->condition = "products.id <>".$product->id.' AND types.id = '.$product->types->id;
+									else
+									$q->condition = "products.id <>".$product->id;	
+										
+									$q->addCondition('productDetails.product_id is not null');
+									$q->addCondition('products.status = 0');
+									$q->together = true;
+									$q->alias="products";
+									$q->with = array('types', 'brands', 'productDetails');
+									$tempproducts = Products::model()->findAll($q);
+									if(isset($tempproducts) && !empty($tempproducts)){
+								?>
+								
+								<h3 class="offset_title">Related Products</h3>
+
+								<div class="owl_carousel related_products">
+
+								<?php
+								
+								foreach($tempproducts as $tprod){
+								$images = json_decode($tprod->images);
+								?>
+
+										<div class="product_item">
+
+											<!-- - - - - - - - - - - - - - Thumbmnail - - - - - - - - - - - - - - - - -->
+
+											<div class="image_wrap">
+
+												<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt=""  >
+
+												<!-- - - - - - - - - - - - - - Product actions - - - - - - - - - - - - - - - - -->
+
+												<div class="actions_wrap">
+
+													<?php if(Yii::app()->user->isGuest){ ?>
+														<a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container new_item_wishlist" data-pid="<?=$tprod->id?>">
+														<span class="tooltip right">Add to Wishlist</span></a>
+													<?php } else { ?>
+													<a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_wishlist tooltip_container <?=$tprod->wishlist > 0 ? 'remove_item_wishlist': 'new_item_wishlist' ?>" data-pid="<?=$tprod->id?>"><span class="tooltip right"><?=$tprod->wishlist > 0 ? 'Remove from Wishlist': 'Add to Wishlist' ?></span></a>
+													<?php } ?>
+
+													<a href="#" class="button_dark_grey def_icon_btn middle_btn add_to_compare tooltip_container"><span class="tooltip left">Add to Compare</span></a>
+
+												</div><!--/ .actions_wrap-->
+												
+												<!-- - - - - - - - - - - - - - End of product actions - - - - - - - - - - - - - - - - -->
+
+											</div><!--/. image_wrap-->
+
+											<!-- - - - - - - - - - - - - - End thumbmnail - - - - - - - - - - - - - - - - -->
+
+											<!-- - - - - - - - - - - - - - Label - - - - - - - - - - - - - - - - -->
+
+											
+
+											<!-- - - - - - - - - - - - - - End label - - - - - - - - - - - - - - - - -->
+
+											<!-- - - - - - - - - - - - - - Product title & price - - - - - - - - - - - - - - - - -->
+
+											<div class="description">
+												<?=CHtml::link(CString::truncate($tprod->name, 50, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'productTitle'))?>
+												
+												<!-- - - - - - - - - - - - - - Product rating - - - - - - - - - - - - - - - - -->
+
+												<ul class="rating">
+
+													<li class="active"></li>
+													<li class="active"></li>
+													<li class="active"></li>
+													<li class="active"></li>
+													<li></li>
+
+												</ul>
+												
+												<!-- - - - - - - - - - - - - - End of product rating - - - - - - - - - - - - - - - - -->
+												
+												<div class="clearfix product_info">
+													<?php if($tprod->productPrice->discount > 0 && $tprod->productPrice->mrp > 0){ ?>
+													<p class="product_price"><span class="discount"><span class="discountRs">Rs. <?=number_format($tprod->productPrice->mrp)?></span><span class="discountRate">(<?=$tprod->productPrice->discount?>% off)</span></span></p>
+													<?php } ?>
+													<p class="product_price alignleft"><b>Rs. <?=number_format($tprod->productPrice->price)?></b></p>
+												</div>
+											</div>
+
+											<!-- - - - - - - - - - - - - - End of product title & price - - - - - - - - - - - - - - - - -->
+
+										</div><!--/ .product_item-->
+										
+										<?php } ?>
+
+								</div><!--/ .owl_carousel -->
+								<?php } ?>
+
+							</section><!--/ .section_offset -->
+
+							<!-- - - - - - - - - - - - - - End of related products - - - - - - - - - - - - - - - - -->
+                            </div>
+                            <!-- End of Related Items -->
+                        </div>
+                        <!-- End of Item Content Two Left -->
+                        <div id="itmContentTwoRight">
+                        
+                            <!-- - - - - - - - - - - - - - You might also like - - - - - - - - - - - - - - - - -->
+
+							<section class="section_offset">
+
+								<?php
+									$q = new CDbCriteria;
+									$q->limit=9;
+									$q->order='RAND()';
+									$q->group = 'products.id';
+									if(isset($product->brands) && isset($product->types))
+									$q->condition = "products.id <>".$product->id.' AND (brands.id ='.$product->brands->id. ' OR types.id = '.$product->types->id.')';
+									else if(isset($product->brands))
+									$q->condition = "products.id <>".$product->id.' AND brands.id ='.$product->brands->id;
+									else if(isset($product->types))
+									$q->condition = "products.id <>".$product->id.' AND types.id = '.$product->types->id;
+									else
+									$q->condition = "products.id <>".$product->id;	
+									$q->addCondition('productDetails.product_id is not null');
+									$q->addCondition('products.status = 0');
+									$q->together = true;
+									$q->alias="products";
+									$q->with = array('types', 'brands', 'productDetails');
+									$tempproducts = Products::model()->findAll($q);
+									if(isset($tempproducts) && !empty($tempproducts) && count($tempproducts) >4){
+								?>
+								<h3 class="offset_title itemH3" id="youMightLike">You Might Also Like</h3>
+
+								<div class="owl_carousel widgets_carousel">
+
+									
+
+									<?php
+									$i = 0;
+									foreach($tempproducts as $tprod){
+									$images = json_decode($tprod->images);
+									?>
+									<?php if($i % 3 == 0) { ?>
+									<ul class="products_list_widget">
+									<?php } ?>
+										<!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+
+										<li>
+											
+											<a href="<?=$this->createUrl('site/products', array('url'=>$tprod->url))?>" class="product_thumb">
+												
+												<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? $images[0]->normal : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" width="83" height="83">
+
+											</a>
+
+											<div class="wrapper">
+
+												<?=CHtml::link(CString::truncate($tprod->name, 50, '...', false), array('site/products', 'url'=>$tprod->url), array('class'=>'product_title'))?>
+
+												<div class="clearfix product_info">
+
+													<p class="product_price alignleft"><b>Rs. <?=number_format($tprod->productPrice->price)?></b></p>
+													
+
+												</div>
+
+											</div>
+
+										</li>
+
+									<?php if(($i+1) % 3 == 0) { ?>
+									</ul><!--/ .list_of_products-->
+									<?php } $i++; } ?>
+								</div>
+
+									<?php } ?>
+							</section>
+
+							<!-- - - - - - - - - - - - - - End of you might also like - - - - - - - - - - - - - - - - -->
+                            
+                            <!-- - - - - - - - - - - - - - Already viewed products - - - - - - - - - - - - - - - - -->
+
+							<section class="section_offset">
+
+								<?php
+									$session = Yii::app()->session;
+									$temp = array();
+									$k=array_search($product->id, $session['recentIds']);
+									if ($k!==false){
+										$myarr = $session['recentIds'];
+										unset($myarr[$k]);
+										$temp = $myarr;
+									}
+									if(count($temp)> 0 ){
+									
+									$q = new CDbCriteria;
+									$q->limit=4;
+									$q->group='products.id';
+									$q->addInCondition('products.id', $temp, 'AND');
+									$q->addCondition('productDetails.product_id is not null');
+									$q->addCondition('products.status = 0');
+									$q->together = true;
+									$q->alias="products";
+									$q->with = array('types', 'brands', 'productDetails');
+									$tempproducts = Products::model()->findAll($q);
+									if(isset($tempproducts) && !empty($tempproducts)){
+								?>
+								
+								<h3 class="itemH3">Recently Viewed</h3>
+
+								<ul class="products_list_widget">
+								<!-- - - - - - - - - - - - - - Product - - - - - - - - - - - - - - - - -->
+								<?php foreach($tempproducts as $prod){ 
+								$images = json_decode($prod->images);
+								?>
+									<li>
+
+										<a href="<?=$this->createUrl('site/products', array('url'=>$prod->url))?>" class="product_thumb">
+											
+											<img src="<?=(isset($images) && !empty($images) && $images[0]->normal) ? str_replace("400x400","100x100", $images[0]->normal) : Yii::app()->theme->baseUrl.'/images/no-img.png'; ?>" alt="" >
+
+										</a>
+
+										<div class="wrapper">
+											<?=CHtml::link(CString::truncate($prod->name, 50, '...', false), array('site/products', 'url'=>$prod->url), array('class'=>'product_title'))?>
+
+											<div class="clearfix product_info">
+
+												<p class="product_price alignleft"><b>Rs. <?=number_format($prod->productPrice->price)?></b></p>
+
+											</div>
+
+										</div>
+
+									</li>
+								<?php } ?>
+									<!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
+								</ul><!--/ .list_of_products-->
+
+									<?php } } ?>
+							</section>
+
+							<!-- - - - - - - - - - - - - - End of already viewed products - - - - - - - - - - - - - - - - -->
+                        </div>
+                        <!-- End of Item Content Two Right -->
+                        <div style="clear:both;"></div>
+                    </div>
+					<div id="reviews">
+					</div>
+					<!-- End of Reviews -->
+				</div>
+                <div style="clear:both;"></div>
+                <!-- End of Item -->
+			</div>
+			<!-- End of Home Contents -->
+			<script type="text/javascript">
+			$(function(){
+
+				$('.buy-button').click(function(){
+					var url ="<?=$this->createUrl('/site/selectedstore')?>";
+					var data = $.ajax({type: "POST", url: url, data: {id: $(this).attr('data-redirect')}, async: false}).responseText;  
+					d = $.parseJSON(data); 
+					if(d.status == "success")
+						return true;
+					else
+					return false;
+				});
+				$('.show-all-reviews').click(function(){
+					var url = "<?=$this->createUrl('/site/productreviews')?>";
+					var obj = $(this);
+					$.get(url,{id: $(obj).attr('data-pid')}, function(d){ $('ul.reviews').append(d); $(obj).hide();});
+					return false;
+				});
+
+				$(document).on('click', '.new_item_wishlist', function(){
+					if($('#login').length)
+						$('#login').trigger('click');
+					else{
+					var url = "<?=$this->createUrl('/site/addwishlist')?>";
+					var obj = $(this);
+					$.post(url,{pid: $(obj).attr('data-pid')}, function(d){ d = $.parseJSON(d); if(d.status == "success") { $(obj).find("span").text("Remove from Wishlist"); $( obj ).switchClass( "new_item_wishlist", "remove_item_wishlist"); } });
+					}
+					return false;
+				});
+				$(document).on('click', '.remove_item_wishlist', function(){
+					var url = "<?=$this->createUrl('/site/removewishlist')?>";
+					var obj = $(this);
+					$.post(url,{pid: $(obj).attr('data-pid')}, function(d){ d = $.parseJSON(d); if(d.status == "success"){ $(obj).find("span").text("Add to Wishlist"); $( obj ).switchClass( "remove_item_wishlist", "new_item_wishlist"); }});
+					return false;
+				});
+
+
+
+			});
+			</script>

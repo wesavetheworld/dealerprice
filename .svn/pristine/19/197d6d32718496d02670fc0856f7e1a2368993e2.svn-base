@@ -155,9 +155,7 @@ foreach($products as $p){
                 </div>
                 <div id="products">
 				</div>
-				
                 <div style="clear:both;"></div>
-				<div id="showloading"><h1>Loading...</h1></div>
                 <!-- End of Featured Products -->
 			<?php } ?>
 			</div>
@@ -171,9 +169,8 @@ $(document).ready(function(){
     $(window).scroll(function() {
         if(($(window).scrollTop() + $(window).height()) >= ($(document).height()-230) && !running) {
 			running = true;
-			$('#showloading').show();
             var url = window.location.href;
-            $.get(url, {limit: limit, ajax:true}, function(d){ $('#products').append(d); $('#showloading').hide(); running = false; });
+            $.get(url, {limit: limit, ajax:true}, function(d){ $('#products').append(d); running = false; });
 			limit=limit+12;
         }
     });
