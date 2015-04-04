@@ -1,0 +1,13 @@
+2015/04/01 11:30:27 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\dealerprice\protected\controllers\SiteController.php:352)
+Stack trace:
+#0 C:\xampp\htdocs\yii\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\xampp\htdocs\yii\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\yii\web\CController.php(286): SiteController->runAction()
+#3 C:\xampp\htdocs\yii\web\CController.php(265): SiteController->runActionWithFilters()
+#4 C:\xampp\htdocs\yii\web\CWebApplication.php(282): SiteController->run()
+#5 C:\xampp\htdocs\yii\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\yii\base\CApplication.php(184): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\dealerprice\index.php(13): CWebApplication->run()
+REQUEST_URI=/dealerprice/product/olympus-vr-320-point-and-shoot-camera-red-4-2-52-5mm-24-300mm-equivalent-in-35mm-photography
+in C:\xampp\htdocs\dealerprice\protected\controllers\SiteController.php (352)
+in C:\xampp\htdocs\dealerprice\index.php (13)
