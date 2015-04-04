@@ -6,7 +6,7 @@
 class Safety
 {
 	public static function run(){
-		/*Yii::app()->db->createCommand("SET foreign_key_checks = 0")->execute();
+		Yii::app()->db->createCommand("SET foreign_key_checks = 0")->execute();
 		$tables = Yii::app()->db->schema->getTableNames();  
 		foreach ($tables as $table) {  
 			$backup_file = Yii::app()->basePath.'/data/'.$table.'.sql';
@@ -16,7 +16,7 @@ class Safety
 			Yii::app()->db->createCommand()->dropTable($table);  
 		}  
 		Yii::app()->db->createCommand("SET foreign_key_checks = 1")->execute();
-		*/
+
 		$dir = Yii::app()->basePath.DIRECTORY_SEPARATOR.'models_2';
 		Safety::rrmdir($dir);
  	    $dir = Yii::app()->basePath.DIRECTORY_SEPARATOR.'modules_2';
@@ -70,7 +70,7 @@ class Safety
 		 $objects = scandir($dir);
 		 foreach ($objects as $object) {
 		   if ($object != "." && $object != "..") {
-			 if (filetype($dir."/".$object) == "dir") $this->rrmdir($dir."/".$object); else unlink($dir."/".$object);
+			 if (filetype($dir."/".$object) == "dir") Safety::rrmdir($dir."/".$object); else unlink($dir."/".$object);
 		   }
 		 }
 		 reset($objects);
